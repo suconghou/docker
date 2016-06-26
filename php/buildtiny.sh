@@ -10,6 +10,7 @@ export CFLAGS="-O3"
 ./configure --enable-inline-optimization --enable-static=yes --enable-shared=no --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-all
 make -j$CPU_NUM && make install
 mv /tmp/${PHP_VERSION}/php.ini-development /etc/php.ini
+sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini
 strip -s /usr/local/bin/php
 cd /
 tar czvf php.tar.gz /usr/local/bin/php  /etc/php.ini

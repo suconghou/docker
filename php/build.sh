@@ -15,6 +15,7 @@ mv /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/www.conf
 strip -s /usr/local/bin/php
 strip -s /usr/local/sbin/php-fpm
 mkdir -p /var/log/php-fpm
+sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini
 sed -i '/^;error_log.*/cerror_log = \/var\/log\/php-fpm\/php-fpm.log' /usr/local/etc/php-fpm.conf
 sed -i '/^;pid.*/cpid = \/var\/run\/php-fpm.pid' /usr/local/etc/php-fpm.conf
 sed -i '/^;slowlog.*/cslowlog = \/var\/log\/php-fpm\/$pool.log.slow' /usr/local/etc/php-fpm.d/www.conf
