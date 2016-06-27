@@ -1,6 +1,6 @@
 ## PHP
 
-version php7.07
+version php7.08
 
 
 ## Usage
@@ -10,7 +10,7 @@ version php7.07
 
 ## tinyphp
 
-tiny php version only 10.24MB with php7.07
+tiny php version only 10.24MB with php7.08
 
 ## compile
 
