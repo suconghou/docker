@@ -2,18 +2,23 @@
 
 **a very tiny nginx container with google proxy**
 
-It is very small only 11MB with google proxy
+It is very small only 5.9MB with google proxy
 
-its nginx version is 1.10.0
+its nginx version is 1.11.1
 
 ## Usage
 
 ```
- docker run -d --name nginx -p 6060:80 suconghou/nginx-google /bin/sh -c "nginx ;while true ; do sleep 60 ;done "
+docker run -d --name nginx -p 6060:80 --restart always -m 60m suconghou/nginx-google nginx -g 'daemon off;'
+
 ```
 or
 ```
-docker run -it --name nginx -p 6060:80 suconghou/nginx-google sh
+docker run -d --name nginx -p 6060:80 --restart always -m 60m suconghou/nginx-google /bin/sh -c "nginx ;while true ; do sleep 60 ;done "
+```
+or
+```
+docker run -it --name nginx -p 6060:80 --restart always -m 60m suconghou/nginx-google sh
 ```
 and then just start nginx in the shell and CTRL+P+Q to leave the container.
 
@@ -38,5 +43,7 @@ server{
 
 ```
 
-also see https://hub.docker.com/r/suconghou/nginx-google/ 
+see https://hub.docker.com/r/suconghou/nginx-google/
+
+dockerfile https://github.com/suconghou/docker/tree/master/nginx-google
 

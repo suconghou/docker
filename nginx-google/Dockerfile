@@ -1,7 +1,6 @@
-FROM busybox
+FROM alpine
 MAINTAINER suconghou
-RUN mkdir -p /usr/local/nginx 
-ADD nginx /usr/local/nginx/
-ADD lib64.tar.xz /
-RUN mv /usr/local/nginx/sbin/nginx  /usr/sbin/ 
-
+ADD nginx.tar.gz /
+ADD nginx.conf /etc/nginx/
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
+EXPOSE 80 443

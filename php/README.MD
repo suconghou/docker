@@ -1,16 +1,28 @@
 ## PHP
 
+based on alpine
+
 version php7.0.8
 
 
 ## Usage
 
+```
+docker run --rm -it suconghou/phptiny sh
+```
 
 
+## php
 
-## tinyphp
+full version 36.8MB
 
-tiny php version only 10.24MB with php7.0.8
+https://hub.docker.com/r/suconghou/php/
+
+tiny version only 10.24MB with php7.0.8
+
+https://hub.docker.com/r/suconghou/phptiny/
+
+
 
 ## compile
 
