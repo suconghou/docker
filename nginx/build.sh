@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget file openssl-dev pcre-dev zlib-dev
 cd /tmp
-NGINX_VERSION=nginx-1.11.1
+NGINX_VERSION=nginx-1.11.2
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://nginx.org/download/${NGINX_VERSION}.tar.gz
 tar -zxvf ${NGINX_VERSION}.tar.gz

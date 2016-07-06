@@ -4,7 +4,7 @@
 
 It is very small only 5.9MB with google proxy
 
-its nginx version is 1.11.1
+its nginx version is 1.11.2
 
 ## Usage
 

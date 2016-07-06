@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget git openssl-dev pcre-dev zlib-dev
 cd /tmp
-NGINX_VERSION=nginx-1.11.1
+NGINX_VERSION=nginx-1.11.2
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 git clone https://github.com/cuber/ngx_http_google_filter_module
 git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module
