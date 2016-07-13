@@ -42,6 +42,10 @@ server{
 }
 
 ```
+使用`--log-opt`限制日志文件大小
+```
+docker run -d --name google -p 8084:80 --restart always -m 30m --log-opt max-size=10m suconghou/nginx-google nginx -g 'daemon off;'
+```
 
 see https://hub.docker.com/r/suconghou/nginx-google/
 
