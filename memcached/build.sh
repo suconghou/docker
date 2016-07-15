@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget libevent-dev
 cd /tmp
-MEMCACHE_VERSION=memcached-1.4.28
+MEMCACHE_VERSION=memcached-1.4.29
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://www.memcached.org/files/${MEMCACHE_VERSION}.tar.gz
 tar xzf ${MEMCACHE_VERSION}.tar.gz
