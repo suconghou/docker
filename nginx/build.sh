@@ -1,10 +1,10 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget file openssl-dev pcre-dev zlib-dev
 cd /tmp
-NGINX_VERSION=nginx-1.11.2
+NGINX_VERSION=nginx-1.11.3
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://nginx.org/download/${NGINX_VERSION}.tar.gz
-tar -zxvf ${NGINX_VERSION}.tar.gz
+tar -zxf ${NGINX_VERSION}.tar.gz
 cd ${NGINX_VERSION}
 export CFLAGS="-O3"
 ./configure --with-http_v2_module --with-http_ssl_module --sbin-path=/usr/local/sbin/nginx --prefix=/etc/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid

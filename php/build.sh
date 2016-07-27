@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget file openssl-dev pcre-dev zlib-dev libxml2-dev curl-dev jpeg-dev  libpng-dev freetype-dev libmcrypt-dev bzip2-dev libxslt-dev
 cd /tmp
-PHP_VERSION=php-7.0.8
+PHP_VERSION=php-7.0.9
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://php.net/distributions/${PHP_VERSION}.tar.xz
 tar -xJf ${PHP_VERSION}.tar.xz
@@ -9,7 +9,7 @@ cd ${PHP_VERSION}
 export CFLAGS="-O3"
 ./configure --enable-inline-optimization --enable-static=yes --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --enable-opcache --enable-fpm  --enable-posix --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath  --enable-zip --enable-mbstring --enable-gd-native-ttf --with-iconv --with-mysqli --with-pdo-mysql --with-curl --with-gd --with-freetype-dir=/usr/include/freetype2 --with-png-dir=/usr/include --with-jpeg-dir=/usr/include --with-openssl --with-mcrypt --enable-exif --enable-calendar  --with-xsl --with-bz2
 make -j$CPU_NUM && make install
-mv /tmp/${PHP_VERSION}/php.ini-development /etc/php.ini
+mv /tmp/${PHP_VERSION}/php.ini-production /etc/php.ini
 mv /usr/local/etc/php-fpm.conf.default  /usr/local/etc/php-fpm.conf
 mv /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/www.conf
 strip -s /usr/local/bin/php
