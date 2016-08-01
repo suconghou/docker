@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget pcre-dev zlib-dev bzip2-dev
 cd /tmp
-LIGHTTPD_VERSION=lighttpd-1.4.40
+LIGHTTPD_VERSION=lighttpd-1.4.41
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://download.lighttpd.net/lighttpd/releases-1.4.x/${LIGHTTPD_VERSION}.tar.xz
 tar xJf ${LIGHTTPD_VERSION}.tar.xz
