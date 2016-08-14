@@ -1,0 +1,4 @@
+FROM alpine
+MAINTAINER suconghou
+ADD shadowsocks-libev.tar.gz /
+EXPOSE 443

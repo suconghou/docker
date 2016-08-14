@@ -1,4 +1,4 @@
 FROM scratch
 MAINTAINER suconghou
 ADD shadowsocks /
-EXPOSE 443 
+EXPOSE 443
