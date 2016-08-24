@@ -2,7 +2,7 @@
 
 haproxy docker image , total size 5.674 MB
 
-haproxy version 1.6.7
+haproxy version 1.6.8
 
 haproxy release here http://www.haproxy.org/#down
 
