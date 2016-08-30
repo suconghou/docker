@@ -16,10 +16,15 @@ docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks /shadowsocks -
 
 **shadowsocks-libev**
 
-shadowsocks-libev version 2.4.8 ,total size 5.17 MB
+shadowsocks-libev version 2.5.0 ,total size 5.174 MB
 
 ```
 docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks:libev ss-server -s 0.0.0.0 -p 443 -k 123456 -m aes-256-cfb -t 300 -d 8.8.8.8 --fast-open -u
+```
+
+or use env variable
+```
+docker run --name shadowsocks -d -p 443:443 -e SERVER_PORT="443" -e PASSWORD="123456" suconghou/shadowsocks:libev
 ```
 
 
