@@ -9,16 +9,15 @@ its nginx version is 1.11.3
 ## Usage
 
 ```
-docker run -d --name nginx -p 6060:80 --restart always -m 60m suconghou/nginx-google nginx -g 'daemon off;'
-
+docker run -d --name nginx -p 6060:80 --restart always -m 20m --log-opt max-size=2m suconghou/nginx-google nginx -g 'daemon off;'
 ```
 or
 ```
-docker run -d --name nginx -p 6060:80 --restart always -m 60m suconghou/nginx-google /bin/sh -c "nginx ;while true ; do sleep 60 ;done "
+docker run -d --name nginx -p 6060:80 --restart always -m 20m --log-opt max-size=2m suconghou/nginx-google /bin/sh -c "nginx ;while true ; do sleep 60 ;done "
 ```
 or
 ```
-docker run -it --name nginx -p 6060:80 --restart always -m 60m suconghou/nginx-google sh
+docker run -it --name nginx -p 6060:80 --restart always -m 20m --log-opt max-size=2m suconghou/nginx-google sh
 ```
 and then just start nginx in the shell and CTRL+P+Q to leave the container.
 
@@ -42,12 +41,16 @@ server{
 }
 
 ```
-使用`--log-opt`限制日志文件大小
-```
-docker run -d --name google -p 8084:80 --restart always -m 30m --log-opt max-size=10m suconghou/nginx-google nginx -g 'daemon off;'
-```
+use `--log-opt` to limit log file size
 
-see https://hub.docker.com/r/suconghou/nginx-google/
+use`-m` to limit memory usage
 
-dockerfile https://github.com/suconghou/docker/tree/master/nginx-google
+use`--restart` to set docker container restart once process exit
+
+## Dockerfile
+
+https://github.com/suconghou/docker/tree/master/nginx-google
+
+Docker image https://hub.docker.com/r/suconghou/nginx-google/
+
 
