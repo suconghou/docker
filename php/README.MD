@@ -2,7 +2,7 @@
 
 based on alpine
 
-version php7.0.10
+version php7.0.11
 
 
 ## Usage
@@ -38,7 +38,7 @@ standard
 
 ### php:cli
 
-cli version 23.27 MB
+cli version 23.25 MB
 
 ```
 [PHP Modules]

@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget file openssl-dev pcre-dev zlib-dev libxml2-dev curl-dev jpeg-dev  libpng-dev freetype-dev libmcrypt-dev bzip2-dev libxslt-dev
 cd /tmp
-PHP_VERSION=php-7.0.10
+PHP_VERSION=php-7.0.11
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://php.net/distributions/${PHP_VERSION}.tar.xz
 tar xJf ${PHP_VERSION}.tar.xz
