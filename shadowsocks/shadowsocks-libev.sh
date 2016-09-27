@@ -1,7 +1,7 @@
 apk update && apk upgrade
-apk --update add gcc g++ make curl  zlib-dev openssl-dev linux-headers asciidoc xmlto
+apk --update add gcc g++ make curl zlib-dev pcre-dev openssl-dev linux-headers asciidoc xmlto
 cd /tmp
-SHADOWSOCKS_LIBEV_VERSION=2.5.0
+SHADOWSOCKS_LIBEV_VERSION=2.5.3
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 curl -sSL https://github.com/shadowsocks/shadowsocks-libev/archive/v${SHADOWSOCKS_LIBEV_VERSION}.tar.gz |  tar xz
 cd shadowsocks-libev-${SHADOWSOCKS_LIBEV_VERSION}
@@ -10,4 +10,4 @@ export CFLAGS="-O3"
 make -j$CPU_NUM && make install
 strip -s /usr/local/bin/ss-server
 cd /
-tar czvf shadowsocks-libev.tar.gz /usr/local/bin/ss-server
+tar czvf shadowsocks-libev.tar.gz /usr/local/bin/ss-server /usr/lib/libpcre.so.1 /usr/lib/libpcre.so.1.2.6
