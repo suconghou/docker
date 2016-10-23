@@ -2,7 +2,9 @@
 
 lighttpd docker image
 
-lighttpd version 1.4.41
+http://download.lighttpd.net/lighttpd/releases-1.4.x/
+
+lighttpd version 1.4.42
 
 docker image size  5.972 MB
 
