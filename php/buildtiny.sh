@@ -1,5 +1,5 @@
 apk update && apk upgrade
-apk --update add gcc g++ make wget file openssl-dev pcre-dev zlib-dev libxml2-dev curl-dev jpeg-dev  libpng-dev freetype-dev libmcrypt-dev bzip2-dev libxslt-dev
+apk --update add xz gcc g++ make wget file openssl-dev pcre-dev zlib-dev libxml2-dev curl-dev jpeg-dev  libpng-dev freetype-dev libmcrypt-dev bzip2-dev libxslt-dev
 cd /tmp
 PHP_VERSION=php-7.0.12
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`

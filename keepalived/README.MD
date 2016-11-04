@@ -2,7 +2,7 @@
 
 keepalived docker image , total size 5.412 MB
 
-keepalived version 1.2.23
+keepalived version 1.2.24
 
 keepalived release here http://www.keepalived.org/index.html
 

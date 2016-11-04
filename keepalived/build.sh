@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget git openssl-dev linux-headers libnfnetlink-dev libnl-dev
 cd /tmp
-KEEPALIVED_VERSION=keepalived-1.2.23
+KEEPALIVED_VERSION=keepalived-1.2.24
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://www.keepalived.org/software/${KEEPALIVED_VERSION}.tar.gz
 tar zxf ${KEEPALIVED_VERSION}.tar.gz

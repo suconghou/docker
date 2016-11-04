@@ -4,9 +4,9 @@ website http://www.memcached.org/
 
 memcached all version can be found here http://www.memcached.org/files/
 
-memcached docker image 5.213 MB
+memcached docker image 5.217 MB
 
-memcached version v1.4.32
+memcached version v1.4.33
 
 memcached is in `/usr/local/bin/memcached`,and only 100KB+.
 
