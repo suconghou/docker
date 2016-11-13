@@ -1,10 +1,5 @@
-FROM alpine
+FROM scratch
 MAINTAINER suconghou
 ADD shadowsocks-libev.tar.gz /
-ENV SERVER_ADDR 0.0.0.0
-ENV SERVER_PORT 443
-ENV PASSWORD=
-ENV METHOD      aes-256-cfb
-ENV TIMEOUT     300
-ENV DNS_ADDR    8.8.8.8
-CMD ss-server -s $SERVER_ADDR -p $SERVER_PORT -k $PASSWORD -m $METHOD -t $TIMEOUT -d $DNS_ADDR --fast-open  -u
+ENTRYPOINT ["/ss-server"]
+EXPOSE 443

@@ -4,29 +4,30 @@
 
 shadowsocks-go version 1.1.5 with 64bit
 
-
 ## Usage
+
+**shadowsocks-go**
+
+`docker build -t=suconghou/shadowsocks .`
 
 start docker
 ```
-docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks /shadowsocks -k 123456 -p 443
+docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks -k 123456 -p 443 -m aes-128-cfb -t 300
 ```
-`-k` is the password, `-p` is the server port , and default encryption method is `aes-256-cfb`
+`-k` is the password, `-p` is the server port , and  encryption method is `aes-128-cfb`
 
 
 **shadowsocks-libev**
 
-shadowsocks-libev version 2.5.5 ,total size 5.541 MB
+`./make.sh` to build shadowsocks-libev
+
+shadowsocks-libev version 2.5.6 ,total size 2.108 MB
 
 ```
-docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks:libev ss-server -s 0.0.0.0 -p 443 -k 123456 -m aes-256-cfb -t 300 -d 8.8.8.8 --fast-open -u
+docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks:libev -s 0.0.0.0 -p 443 -k 123456 -m aes-128-cfb -t 300 -d 8.8.8.8 --fast-open -u
 ```
 
-or use env variable
-```
-docker run --name shadowsocks -d -p 443:443 -e SERVER_PORT="443" -e PASSWORD="123456" suconghou/shadowsocks:libev
-```
-
+and encryption method is `aes-128-cfb`
 
 ## Dockerfile
 
