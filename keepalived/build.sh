@@ -1,5 +1,5 @@
 apk update && apk upgrade
-apk --update add gcc g++ make wget git openssl-dev linux-headers libnfnetlink-dev libnl-dev
+apk --update add gcc g++ make wget git openssl-dev linux-headers libnfnetlink-dev libnl-dev xmlto
 cd /tmp
 KEEPALIVED_VERSION=keepalived-1.2.24
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
@@ -13,4 +13,3 @@ strip -s /usr/local/sbin/keepalived
 strip -s /usr/local/bin/genhash
 cd /
 tar czvf keepalived.tar.gz /usr/local/sbin/keepalived /usr/local/bin/genhash  /usr/lib/libnl.so.1 /usr/lib/libnl.so.1.1.4
-
