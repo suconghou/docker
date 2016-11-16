@@ -7,7 +7,7 @@ wget http://php.net/distributions/${PHP_VERSION}.tar.xz
 tar xJf ${PHP_VERSION}.tar.xz
 cd ${PHP_VERSION}
 export CFLAGS="-O3"
-./configure --enable-inline-optimization --enable-static=yes --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --disable-opcache --disable-fpm  --enable-posix --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath  --enable-zip --enable-mbstring --enable-gd-native-ttf --with-iconv --with-mysqli --with-pdo-mysql --with-curl --with-gd --with-freetype-dir=/usr/include/freetype2 --with-png-dir=/usr/include --with-jpeg-dir=/usr/include --with-openssl --with-mcrypt --enable-exif --enable-calendar  --with-xsl --with-bz2
+./configure --enable-inline-optimization --enable-static=yes --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --disable-phpdbg --disable-opcache --disable-fpm  --enable-posix --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath  --enable-zip --enable-mbstring --enable-gd-native-ttf --with-iconv --with-mysqli --with-pdo-mysql --with-curl --with-gd --with-freetype-dir=/usr/include/freetype2 --with-png-dir=/usr/include --with-jpeg-dir=/usr/include --with-openssl --with-mcrypt --enable-exif --enable-calendar  --with-xsl --with-bz2
 make -j$CPU_NUM && make install
 mv /tmp/${PHP_VERSION}/php.ini-production /etc/php.ini
 strip -s /usr/local/bin/php

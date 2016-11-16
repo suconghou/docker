@@ -2,7 +2,7 @@
 
 based on alpine
 
-version php7.0.12
+version php7.0.13
 
 
 ## Usage
@@ -92,7 +92,7 @@ zip
 
 ### php:fpm
 
-fpm version 25.58 MB
+fpm version 39.7 MB
 
 ```
 [PHP Modules]
