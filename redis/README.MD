@@ -2,7 +2,7 @@
 
 redis docker image , 8.374 MB total
 
-redis version 3.2.5
+redis version 3.2.6
 
 website http://redis.io/
 

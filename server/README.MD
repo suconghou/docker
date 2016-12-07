@@ -40,23 +40,25 @@ http {
     fastcgi_connect_timeout 2s;
     fastcgi_send_timeout 10s;
     fastcgi_read_timeout 5s;
+    client_max_body_size 50m
     server {
         listen  80;
         server_name 0.0.0.0;
         index index.html index.php;
         if ($host ~* ^(([\w\-]+)\.share\.ourwill\.cn)$) {
-                set $subdomain $2;
+            set $subdomain $2;
         }
         root /www/$subdomain;
         if ( !-d $document_root ){
-                return 404;
+            return 404;
         }
         try_files $uri $uri/ /index.php?$args;
         location ~ \.php$ {
-                        fastcgi_pass  127.0.0.1:9000;
-                        fastcgi_param debug 2;
-                        include        fastcgi.conf;
-                }
+            try_files $uri =404;
+            fastcgi_pass  127.0.0.1:9000;
+            fastcgi_param debug 2;
+            include        fastcgi.conf;
+        }
     }
 }
 ```
@@ -70,16 +72,22 @@ mysql redis memcached sshd kcptun 185.1MB
 
 start the service
 
-`docker run -d --name service --restart always -m 220m --log-opt max-size=2m -v service-data:/var/lib/mysql -p 2222:22 -p 443:443 -p 3306:3306 -p 6379:6379  -p 11211:11211 suconghou/server:service`
+```
+docker run -d --name service --restart always -m 220m --log-opt max-size=2m -v service-data:/var/lib/mysql -p 2222:22 -p 443:443 -p 3306:3306 -p 6379:6379  -p 11211:11211 suconghou/server:service
+```
 
-`docker run -d --name service --restart always -m 220m --log-opt max-size=2m -p 2222:22 -p 1443:443 -p 3306:3306 -p 6379:6379 -p 11211:11211 suconghou/server:service`
+```
+docker run -d --name service --restart always -m 220m --log-opt max-size=2m -p 2222:22 -p 1443:443 -p 3306:3306 -p 6379:6379 -p 11211:11211 suconghou/server:service
+```
 
 you can login from ssh use user `root` password `123456`
 
 and mysql root password is 123456
 
 
+```
 docker run -d --name=gogs --restart always -m 60m --log-opt max-size=2m  -p 10022:22 -p 10080:3000 -v gogs-data:/data gogs/gogs
+```
 
 ```
 use mysql;
