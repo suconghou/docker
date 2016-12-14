@@ -2,7 +2,7 @@
 
 very tiny nginx from alpine,only 6.1MB
 
-nginx version 1.11.6
+nginx version 1.11.7
 
 ## Usage
 
