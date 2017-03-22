@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget file openssl-dev pcre-dev zlib-dev
 cd /tmp
-NGINX_VERSION=nginx-1.11.8
+NGINX_VERSION=nginx-1.11.11
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://nginx.org/download/${NGINX_VERSION}.tar.gz
 tar -zxf ${NGINX_VERSION}.tar.gz
@@ -12,4 +12,4 @@ make -j$CPU_NUM && make install
 rm -rf /tmp/* /etc/nginx/*.default
 strip -s /usr/local/sbin/nginx
 cd /
-tar czvf nginx.tar.gz /usr/local/sbin/nginx /etc/nginx /var/log/nginx /usr/lib/libpcre.so.1 /usr/lib/libpcre.so.1.2.6
+tar czvf nginx.tar.gz /usr/local/sbin/nginx /etc/nginx /var/log/nginx /usr/lib/libpcre.so.1 /usr/lib/libpcre.so.1.2.7 /lib/libssl.so.1.0.0 /lib/libcrypto.so.1.0.0

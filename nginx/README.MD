@@ -1,8 +1,8 @@
 ## nginx
 
-very tiny nginx from alpine,only 6.2MB
+very tiny nginx from alpine,only 8.04MB
 
-nginx version 1.11.8
+nginx version 1.11.11
 
 ## Usage
 

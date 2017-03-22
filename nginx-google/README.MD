@@ -2,9 +2,9 @@
 
 **a very tiny nginx container with google proxy**
 
-It is very small only 5.9MB with google proxy
+It is very small only 7.79MB with google proxy
 
-its nginx version is 1.11.8
+its nginx version is 1.11.11
 
 ## Usage
 
