@@ -1,8 +1,8 @@
 ## redis
 
-redis docker image , 8.374 MB total
+redis docker image , 7.57 MB total
 
-redis version 3.2.6
+redis version 3.2.8
 
 website http://redis.io/
 
@@ -26,3 +26,7 @@ docker image  https://hub.docker.com/r/suconghou/redis/
 `redis-server --daemonize yes`
 or
 `redis-server --protected-mode no --daemonize yes`
+
+with password auth
+
+`redis-server --protected-mode no --daemonize yes --requirepass QAZwsx123edcvfr654JKL`
