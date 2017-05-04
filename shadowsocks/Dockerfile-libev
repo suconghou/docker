@@ -1,5 +1,5 @@
 FROM scratch
 MAINTAINER suconghou
-ADD shadowsocks-libev.tar.gz /
+ADD ss-server /
 ENTRYPOINT ["/ss-server"]
 EXPOSE 443
