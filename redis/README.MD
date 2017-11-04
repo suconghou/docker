@@ -1,8 +1,8 @@
 ## redis
 
-redis docker image , 7.57 MB total
+redis docker image
 
-redis version 3.2.8
+redis version 4.0.2
 
 website http://redis.io/
 
@@ -13,6 +13,7 @@ all redis version release here http://download.redis.io/releases/
 docker run -d suconghou/redis redis-server
 ```
 
+无其他依赖,可静态编译
 
 ## dockerfile
 

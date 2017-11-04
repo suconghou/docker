@@ -4,13 +4,9 @@ website http://www.memcached.org/
 
 memcached all version can be found here http://www.memcached.org/files/
 
-memcached docker image 4.4 MB
+static build memcached
 
-memcached version v1.4.36
-
-memcached is in `/usr/local/bin/memcached`,and only 100KB+.
-
-
+memcached version v1.5.2
 
 ```
 docker run --rm -it suconghou/memcached memcached -h
@@ -22,3 +18,10 @@ https://github.com/suconghou/docker/tree/master/memcached
 
 
 docker image  https://hub.docker.com/r/suconghou/memcached/
+
+
+## 静态编译
+
+见 http://blog.suconghou.cn/post/memcached-usage
+
+

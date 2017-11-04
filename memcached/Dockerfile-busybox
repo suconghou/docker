@@ -1,0 +1,8 @@
+FROM suconghou/memcached AS build
+RUN /usr/local/bin/memcached -V && ldd /usr/local/bin/memcached
+
+FROM busybox
+MAINTAINER suconghou
+COPY --from=build /usr/local/bin/memcached /usr/local/bin/memcached
+EXPOSE 11211
+

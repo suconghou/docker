@@ -1,0 +1,11 @@
+FROM suconghou/nginx AS build
+
+FROM busybox
+MAINTAINER suconghou
+COPY --from=build /usr/local/sbin/nginx /usr/local/sbin/nginx
+COPY --from=build /etc/nginx /etc/nginx
+COPY --from=build /var/log/nginx /var/log/nginx
+COPY --from=build /var/run /var/run
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
+WORKDIR /etc/nginx
+EXPOSE 80 443

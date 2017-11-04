@@ -11,7 +11,7 @@ sed -i '/^;error_log.*/cerror_log = \/var\/log\/php-fpm\/php-fpm.log' /usr/local
 sed -i '/^;pid.*/cpid = \/var\/run\/php-fpm.pid' /usr/local/etc/php-fpm.conf && \
 sed -i '/^;slowlog.*/cslowlog = \/var\/log\/php-fpm\/$pool.log.slow' /usr/local/etc/php-fpm.d/www.conf && \
 sed -i '/^;request_slowlog_timeout.*/crequest_slowlog_timeout = 5' /usr/local/etc/php-fpm.d/www.conf && \
-php-fpm -t && strip -s /usr/local/sbin/php-fpm && strip -s /usr/local/bin/php && mv php.ini-development /etc/ && mv php.ini-production /etc/php.ini && sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini
+php-fpm -t && strip -s /usr/local/sbin/php-fpm && strip -s /usr/local/bin/php && mv php.ini-development /etc/ && mv php.ini-production /etc/php.ini
 
 FROM alpine
 MAINTAINER suconghou

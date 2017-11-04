@@ -1,7 +1,7 @@
 apk update && apk upgrade
 apk --update add xz gcc g++ make wget file openssl-dev pcre-dev zlib-dev libxml2-dev curl-dev jpeg-dev  libpng-dev freetype-dev libmcrypt-dev bzip2-dev libxslt-dev autoconf libmemcached-dev cyrus-sasl-dev
 cd /tmp
-PHP_VERSION=php-7.0.13
+PHP_VERSION=php-7.1.4
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 wget http://php.net/distributions/${PHP_VERSION}.tar.xz
 wget -O php-redis.zip https://codeload.github.com/phpredis/phpredis/zip/php7

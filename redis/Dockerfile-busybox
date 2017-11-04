@@ -1,0 +1,8 @@
+FROM suconghou/redis AS build
+RUN /usr/local/bin/redis-server -v && ldd /usr/local/bin/redis-server
+
+FROM busybox
+MAINTAINER suconghou
+COPY --from=build /usr/local/bin/ /usr/local/bin/
+COPY --from=build /etc/redis.conf /etc/redis.conf
+EXPOSE 6379

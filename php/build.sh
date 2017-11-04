@@ -1,16 +1,48 @@
 apk update && apk upgrade
-apk --update add xz gcc g++ make wget file openssl-dev pcre-dev zlib-dev libxml2-dev curl-dev jpeg-dev  libpng-dev freetype-dev libmcrypt-dev bzip2-dev libxslt-dev
+apk --update add xz gcc g++ make wget file openssl openssl-dev pcre-dev zlib-dev libxml2-dev curl curl-dev libssh libssh-dev libssh2 libssh2-dev jpeg-dev libpng-dev libwebp-dev libwebp-tools libxpm-dev tiff-dev libjpeg freetype-dev libmcrypt-dev bzip2-dev libxslt-dev
 cd /tmp
-PHP_VERSION=php-7.0.13
-CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
+wget ftp://xmlsoft.org/libxml2/libxml2-2.9.4.tar.gz
+tar zxvf libxml2-2.9.4.tar.gz
+cd libxml2-2.9.4
+./configure
+make && make install
+cd /tmp
+PHP_VERSION=php-7.1.4
 wget http://php.net/distributions/${PHP_VERSION}.tar.xz
 tar xJf ${PHP_VERSION}.tar.xz
 cd ${PHP_VERSION}
-export CFLAGS="-O3"
-./configure --enable-inline-optimization --enable-static=yes --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --disable-phpdbg --disable-opcache --disable-fpm  --enable-posix --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath  --enable-zip --enable-mbstring --enable-gd-native-ttf --with-iconv --with-mysqli --with-pdo-mysql --with-curl --with-gd --with-freetype-dir=/usr/include/freetype2 --with-png-dir=/usr/include --with-jpeg-dir=/usr/include --with-openssl --with-mcrypt --enable-exif --enable-calendar  --with-xsl --with-bz2
-make -j$CPU_NUM && make install
+export CFLAGS="-Os"
+./configure --enable-inline-optimization --enable-static=yes --enable-shared=no --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --disable-opcache --disable-fpm --disable-phpdbg --enable-posix --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath  --enable-zip --enable-mbstring  --enable-gd-native-ttf --with-gd --with-freetype-dir=/usr/local/ --with-png-dir=/usr/include --with-jpeg-dir=/usr/include --with-webp-dir=/usr/include --with-xpm-dir=/usr/include --with-mysqli --with-pdo-mysql --with-openssl  --enable-exif --enable-calendar --with-bz2 LDFLAGS=-static
+sed -i "s{-export-dynamic{-all-static{" Makefile
+make -j4 && make install && strip -s /usr/local/bin/php
 mv /tmp/${PHP_VERSION}/php.ini-production /etc/php.ini
-strip -s /usr/local/bin/php
 sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini
-cd /
-tar czvf php.tar.gz /usr/local/bin/php /etc/php.ini /usr/lib/libexslt.so.0 /usr/lib/libexslt.so.0.8.17 /usr/lib/libmcrypt.so.4 /usr/lib/libmcrypt.so.4.4.8 /usr/lib/libpng16.so.16 /usr/lib/libpng16.so.16.21.0 /usr/lib/libjpeg.so.8 /usr/lib/libjpeg.so.8.0.2 /usr/lib/libcurl.so.4 /usr/lib/libcurl.so.4.4.0 /usr/lib/libbz2.so.1 /usr/lib/libbz2.so.1.0.6 /usr/lib/libxml2.so.2 /usr/lib/libxml2.so.2.9.4 /usr/lib/libfreetype.so.6 /usr/lib/libfreetype.so.6.12.3 /usr/lib/libxslt.so.1 /usr/lib/libxslt.so.1.1.29 /usr/lib/libgcrypt.so.20 /usr/lib/libgcrypt.so.20.1.0  /usr/lib/libgpg-error.so.0 /usr/lib/libgpg-error.so.0.19.0  /usr/lib/libssh2.so.1 /usr/lib/libssh2.so.1.0.1
+
+
+--with-curl=/usr/local/
+--with-mcrypt=/usr/local/mcrypt
+--with-xsl
+
+GD
+
+https://github.com/webmproject/libwebp
+http://download.savannah.gnu.org/releases/freetype/freetype-2.7.tar.gz
+
+
+http://share.suconghou.cn/src/mcrypt-2.6.8.tar.gz
+
+http://share.suconghou.cn/src/libmcrypt-2.5.8.tar.gz
+
+
+
+./configure --prefix=/usr/local/libmcrypt/ --disable-posix-threads
+
+
+
+
+export LD_LIBRARY_PATH=/usr/local/libmcrypt/:/usr/local/lib:/usr/lib
+export LDFLAGS="-L/usr/local/lib -I/usr/local/include/"
+export CFLAGS="-I/usr/local/include/"
+./configure --prefix=/usr/local/mcrypt/ --with-libmcrypt-prefix=/usr/local/libmcrypt
+
+

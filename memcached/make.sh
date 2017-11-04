@@ -1,8 +1,3 @@
 #!/bin/bash
-docker pull alpine
-BUILDSH=$(cat build.sh)
-docker run -it --name tmpbuild alpine sh -c "$BUILDSH"
-rm -f ./memcached.tar.gz
-docker cp tmpbuild:/memcached.tar.gz ./memcached.tar.gz
-docker rm tmpbuild
-docker build -t=suconghou/memcached .
+docker build -t=suconghou/memcached -t=suconghou/memcached:1.5.2 -t=suconghou/memcached:alpine . && \
+docker build -t=suconghou/memcached:busybox . -f Dockerfile-busybox

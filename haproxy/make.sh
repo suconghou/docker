@@ -1,8 +1,3 @@
 #!/bin/bash
-docker pull alpine
-BUILDSH=$(cat build.sh)
-docker run -it --name tmpbuild alpine sh -c "$BUILDSH"
-rm -f ./haproxy.tar.gz
-docker cp tmpbuild:/haproxy.tar.gz ./haproxy.tar.gz
-docker rm tmpbuild
-docker build -t=suconghou/haproxy .
+docker build -t=suconghou/haproxy -t=suconghou/haproxy:1.7.9 -t=suconghou/haproxy:alpine . && \
+docker build -t=suconghou/haproxy:busybox . -f Dockerfile-busybox

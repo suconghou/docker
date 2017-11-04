@@ -2,13 +2,13 @@
 
 based on alpine
 
-version php7.0.13
+version php7.1.11
 
 
 ## Usage
 
 ```
-docker run --rm -it suconghou/phptiny sh
+docker run --rm -it suconghou/php sh
 ```
 
 
@@ -17,23 +17,6 @@ docker run --rm -it suconghou/phptiny sh
 
 https://hub.docker.com/r/suconghou/php/
 
-
-
-### php:tiny
-
-tiny version  10.24 MB
-
-```
-[PHP Modules]
-Core
-date
-pcre
-Reflection
-SPL
-standard
-
-[Zend Modules]
-```
 
 
 ### php:cli
@@ -151,13 +134,11 @@ Zend OPcache
 
 ## compile
 
-use `sh maketiny.sh` to build a tiny version
 
-use `sh make.sh` to build a cli version
+use `sh make.sh` to build a cli and fpm version
 
-use `sh makefpm.sh` to build a fpm  version
 
-fpm version contains `redis`,`memcached` and enable opcache
+full version contains `redis`,`memcached` and enable opcache
 
 ## dockerfile
 
