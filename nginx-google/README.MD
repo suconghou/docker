@@ -4,7 +4,7 @@
 
 It is very small only 7.79MB with google proxy
 
-its nginx version is 1.11.13
+its nginx version is 1.13.3
 
 ## Usage
 
@@ -53,4 +53,8 @@ https://github.com/suconghou/docker/tree/master/nginx-google
 
 Docker image https://hub.docker.com/r/suconghou/nginx-google/
 
+`http_rewrite_module`
+`http_proxy_module`
+
+也可静态编译,同nginx的编译
 

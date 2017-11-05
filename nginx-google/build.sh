@@ -1,15 +1,15 @@
 apk update && apk upgrade
 apk --update add gcc g++ make wget git openssl-dev pcre-dev zlib-dev
 cd /tmp
-NGINX_VERSION=nginx-1.11.13
+NGINX_VERSION=nginx-1.13.3
 CPU_NUM=`cat /proc/cpuinfo | grep processor | wc -l`
 git clone https://github.com/cuber/ngx_http_google_filter_module
 git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module
 wget http://nginx.org/download/${NGINX_VERSION}.tar.gz
-tar -zxf ${NGINX_VERSION}.tar.gz
+tar zxf ${NGINX_VERSION}.tar.gz
 cd ${NGINX_VERSION}
-export CFLAGS="-O3"
 ./configure \
+--with-http_v2_module \
 --with-http_ssl_module \
 --sbin-path=/usr/local/sbin/nginx \
 --prefix=/etc/nginx \
@@ -33,6 +33,7 @@ export CFLAGS="-O3"
 --without-http_scgi_module \
 --without-http_split_clients_module \
 --without-http_ssi_module \
+--without-http_limit_req_module \
 --without-http_upstream_ip_hash_module \
 --without-http_upstream_keepalive_module \
 --without-http_upstream_least_conn_module \
@@ -40,9 +41,9 @@ export CFLAGS="-O3"
 --without-http_uwsgi_module \
 --without-mail_imap_module \
 --without-mail_pop3_module \
---without-mail_smtp_module \
+--without-mail_smtp_module
 
-make -j$CPU_NUM && make install
+make -j$CPU_NUM CFLAGS=-Os && make install
 rm -rf /tmp/* /etc/nginx/*.default
 strip -s /usr/local/sbin/nginx
 cd /

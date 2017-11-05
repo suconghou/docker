@@ -1,8 +1,3 @@
 #!/bin/bash
-docker pull alpine
-BUILDSH=$(cat build.sh)
-docker run -it --name tmpbuild alpine sh -c "$BUILDSH"
-rm -f ./lighttpd.tar.gz
-docker cp tmpbuild:/lighttpd.tar.gz ./lighttpd.tar.gz
-docker rm tmpbuild
-docker build -t=suconghou/lighttpd .
+docker build -t=suconghou/lighttpd -t=suconghou/lighttpd:1.4.47 -t=suconghou/lighttpd:alpine . && \
+docker build -t=suconghou/lighttpd:busybox . -f Dockerfile-busybox
