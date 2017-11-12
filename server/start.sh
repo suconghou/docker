@@ -1,6 +1,6 @@
 #!/bin/sh
-/usr/local/bin/sshd
+/usr/local/sbin/sshd
 php-fpm
 memcached -d -u nobody -p 11211 -m 4 -c 512 -P /var/run/memcached.pid
 nginx
-redis-server --protected-mode no  --requirepass QAZwsx123edcvfr654JKL
+redis-server /etc/redis.conf
