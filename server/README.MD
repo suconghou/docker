@@ -66,18 +66,18 @@ http {
 
 ## service
 
-mysql redis memcached sshd kcptun 185.1MB
+mysql redis memcached sshd 185.1MB
 
 `docker build -t=suconghou/server:service -f service .`
 
 start the service
 
 ```
-docker run -d --name service --restart always -m 220m --log-opt max-size=2m -v service-data:/var/lib/mysql -p 2222:22 -p 443:443 -p 3306:3306 -p 6379:6379  -p 11211:11211 suconghou/server:service
+docker run -d --name service --restart always -m 360m --log-opt max-size=2m -v service-data:/var/lib/mysql -p 2222:22 -p 443:443 -p 3306:3306 -p 6379:6379  -p 11211:11211 suconghou/server:service
 ```
 
 ```
-docker run -d --name service --restart always -m 220m --log-opt max-size=2m -p 2222:22 -p 1443:443 -p 3306:3306 -p 6379:6379 -p 11211:11211 suconghou/server:service
+docker run -d --name service --restart always -m 360m --log-opt max-size=2m -p 2222:22 -p 1443:443 -p 3306:3306 -p 6379:6379 -p 11211:11211 suconghou/server:service
 ```
 
 you can login from ssh use user `root` password `123456`
@@ -85,12 +85,21 @@ you can login from ssh use user `root` password `123456`
 and mysql root password is 123456
 
 
-```
-docker run -d --name=gogs --restart always -m 60m --log-opt max-size=2m  -p 10022:22 -p 10080:3000 -v gogs-data:/data gogs/gogs
-```
 
 ```
 use mysql;
 UPDATE user SET password=PASSWORD("123456") WHERE user='root';
 FLUSH PRIVILEGES;
 ```
+
+memcached/redis/sshd/
+
+
+
+
+
+
+
+
+
+

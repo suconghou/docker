@@ -1,0 +1,15 @@
+FROM alpine AS build
+RUN apk update && apk upgrade && apk add gcc g++ make wget linux-headers
+RUN DROPBEAR_VERSION=dropbear-2017.75 && wget --no-check-certificate https://matt.ucc.asn.au/dropbear/releases/${DROPBEAR_VERSION}.tar.bz2 && tar jxf ${DROPBEAR_VERSION}.tar.bz2 && cd ${DROPBEAR_VERSION} && ls -lha && \
+CFLAGS="-Os -ffunction-sections -fdata-sections" LDFLAGS="-static -Wl,--gc-sections" ./configure --disable-zlib && make -j2 && make install
+RUN strip -s /usr/local/bin/dbclient /usr/local/bin/dropbearconvert /usr/local/bin/dropbearkey /usr/local/sbin/dropbear
+
+FROM alpine
+MAINTAINER suconghou
+COPY --form=build /usr/local/bin/dbclient /usr/local/bin/dbclient
+COPY --form=build /usr/local/bin/dropbearconvert /usr/local/bin/dropbearconvert
+COPY --form=build /usr/local/bin/dropbearkey /usr/local/bin/dropbearkey
+COPY --form=build /usr/local/sbin/dropbear /usr/local/sbin/dropbear
+RUN mkdir -p /etc/dropbear && echo "root:sch@dockerdropbear" | chpasswd
+CMD ["/usr/local/sbin/dropbear","-F","-E","-R","-m"]
+EXPOSE 22

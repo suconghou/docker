@@ -17,7 +17,7 @@ else
 fi
 /usr/local/bin/sshd
 memcached -d -u nobody -p 11211 -m 4 -c 512 -P /var/run/memcached.pid
-redis-server --protected-mode no --daemonize yes
+redis-server --protected-mode no --daemonize yes --requirepass QAZwsx123edcvfr654JKL
 /usr/bin/mysqld --user=root > /var/log/mysqld.log 2>&1 &
 
 if [ -f "$tfile" ]; then
