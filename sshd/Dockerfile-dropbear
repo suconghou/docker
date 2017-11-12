@@ -6,10 +6,10 @@ RUN strip -s /usr/local/bin/dbclient /usr/local/bin/dropbearconvert /usr/local/b
 
 FROM alpine
 MAINTAINER suconghou
-COPY --form=build /usr/local/bin/dbclient /usr/local/bin/dbclient
-COPY --form=build /usr/local/bin/dropbearconvert /usr/local/bin/dropbearconvert
-COPY --form=build /usr/local/bin/dropbearkey /usr/local/bin/dropbearkey
-COPY --form=build /usr/local/sbin/dropbear /usr/local/sbin/dropbear
+COPY --from=build /usr/local/bin/dbclient /usr/local/bin/dbclient
+COPY --from=build /usr/local/bin/dropbearconvert /usr/local/bin/dropbearconvert
+COPY --from=build /usr/local/bin/dropbearkey /usr/local/bin/dropbearkey
+COPY --from=build /usr/local/sbin/dropbear /usr/local/sbin/dropbear
 RUN mkdir -p /etc/dropbear && echo "root:sch@dockerdropbear" | chpasswd
 CMD ["/usr/local/sbin/dropbear","-F","-E","-R","-m"]
 EXPOSE 22
