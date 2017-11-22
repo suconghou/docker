@@ -2,7 +2,7 @@
 
 static build nginx
 
-nginx version 1.13.6
+nginx version 1.13.7
 
 ## Usage
 
@@ -32,4 +32,6 @@ objs/ngx_modules.o -static \
 
 
 for nginx:busybox can be run use `nginx -g "user root root;"`
+
+因为 busybox 里面没有`nobody`组，执行`addgroup nobody`添加组后也可以直接运行。
 
