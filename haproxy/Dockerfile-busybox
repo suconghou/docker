@@ -1,5 +1,5 @@
 FROM suconghou/haproxy AS build
 RUN /usr/local/sbin/haproxy -v && ldd /usr/local/sbin/haproxy
 FROM busybox
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/haproxy /usr/local/sbin/haproxy
