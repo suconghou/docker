@@ -1,6 +1,6 @@
 FROM alpine AS build
 RUN apk update && apk upgrade && apk add gcc g++ make wget linux-headers
-RUN REDIS_VERSION=redis-4.0.2 && wget http://download.redis.io/releases/${REDIS_VERSION}.tar.gz && tar xzf ${REDIS_VERSION}.tar.gz && cd ${REDIS_VERSION} && \
+RUN REDIS_VERSION=redis-4.0.4 && wget http://download.redis.io/releases/${REDIS_VERSION}.tar.gz && tar xzf ${REDIS_VERSION}.tar.gz && cd ${REDIS_VERSION} && \
 make LDFLAGS=-static -j2 && make install && strip -s /usr/local/bin/* && mv redis.conf /etc/redis.conf
 
 FROM alpine
