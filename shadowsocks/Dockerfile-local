@@ -1,0 +1,7 @@
+FROM suconghou/shadowsocks:libev AS build
+RUN /usr/local/bin/ss-local -v && ldd /usr/local/bin/ss-local
+FROM scratch
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /usr/local/bin/ss-local /
+ENTRYPOINT ["/ss-local"]
+EXPOSE 443

@@ -4,6 +4,23 @@
 
 shadowsocks-go version 1.2.1 with 64bit
 
+FROM scratch
+LABEL maintainer="suconghou@gmail.com"
+
+ADD ss-server /
+ENTRYPOINT ["/ss-server"]
+EXPOSE 443
+
+
+
+FROM scratch
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /shadowsocks /
+ENTRYPOINT ["/shadowsocks"]
+EXPOSE 443
+&& file shadowsocks-server && strip -s shadowsocks-server && ls -lha
+
+
 ## Usage
 
 **shadowsocks-go**
