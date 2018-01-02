@@ -1,31 +1,13 @@
 ## Shadowsocks docker
 
-**shadowsocks docker , it is very small , only 2.3MB**
 
-shadowsocks-go version 1.2.1 with 64bit
+shadowsocks-go version 1.2.1
 
-FROM scratch
-LABEL maintainer="suconghou@gmail.com"
-
-ADD ss-server /
-ENTRYPOINT ["/ss-server"]
-EXPOSE 443
-
-
-
-FROM scratch
-LABEL maintainer="suconghou@gmail.com"
-COPY --from=build /shadowsocks /
-ENTRYPOINT ["/shadowsocks"]
-EXPOSE 443
-&& file shadowsocks-server && strip -s shadowsocks-server && ls -lha
-
+shadowsocks-libev version 3.1.2
 
 ## Usage
 
 **shadowsocks-go**
-
-`docker build -t=suconghou/shadowsocks .`
 
 start docker
 ```
@@ -37,10 +19,6 @@ docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks -k 123456 -p 4
 
 **shadowsocks-libev**
 
-`docker build -t=suconghou/shadowsocks:libev -f Dockerfile-libev .`
-
-
-shadowsocks-libev version 3.0.7 ,total size 852 KB
 
 ```
 docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks:libev -s 0.0.0.0 -p 443 -k 123456 -m aes-128-cfb -t 300 -d 8.8.8.8 --fast-open -u

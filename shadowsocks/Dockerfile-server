@@ -1,5 +1,5 @@
 FROM suconghou/shadowsocks:libev AS build
-RUN /usr/local/bin/ss-server -v && ldd /usr/local/bin/ss-server
+RUN ls -lh /usr/local/bin/ss-server
 FROM scratch
 LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/bin/ss-server /
