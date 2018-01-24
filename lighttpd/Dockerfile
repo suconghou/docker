@@ -4,6 +4,6 @@ RUN LIGHTTPD_VERSION=lighttpd-1.4.48 && wget http://download.lighttpd.net/lightt
 export CFLAGS=-Os && export LDFLAGS="-static-libstdc++ -static-libgcc --static -Wl,-Bstatic" && scons -j 4 build_static=1 build_dynamic=0 install && strip -s /usr/local/sbin/lighttpd
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/lighttpd /usr/local/sbin/lighttpd
 EXPOSE 80

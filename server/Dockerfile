@@ -6,7 +6,7 @@ FROM suconghou/php AS php
 
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=sshd /usr/local/bin/ssh-keygen /usr/local/bin/ssh-keygen
 COPY --from=sshd /usr/local/sbin/sshd /usr/local/sbin/sshd
 COPY --from=memcached /usr/local/bin/memcached /usr/local/bin/memcached

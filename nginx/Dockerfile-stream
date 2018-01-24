@@ -6,7 +6,7 @@ sed -i "s/-lpcre -lssl -lcrypto -lz/-static -lpcre -lssl -lcrypto -lz/g" objs/Ma
 strip -s /usr/local/sbin/nginx &&  rm -rf /etc/nginx/*.default
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/nginx /usr/local/sbin/nginx
 COPY --from=build /etc/nginx /etc/nginx
 COPY --from=build /var/log/nginx /var/log/nginx

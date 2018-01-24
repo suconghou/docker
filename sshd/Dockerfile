@@ -5,7 +5,7 @@ RUN OPENSSH_VERSION=openssh-7.6p1 && wget http://ftp.jaist.ac.jp/pub/OpenBSD/Ope
 RUN strip -s /usr/local/bin/ssh /usr/local/bin/scp /usr/local/bin/sftp /usr/local/bin/ssh-keygen /usr/local/sbin/sshd
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/bin/ssh /usr/local/bin/ssh
 COPY --from=build /usr/local/bin/scp /usr/local/bin/scp
 COPY --from=build /usr/local/bin/sftp /usr/local/bin/sftp

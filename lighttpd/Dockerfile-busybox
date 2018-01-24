@@ -2,6 +2,6 @@ FROM suconghou/lighttpd AS build
 RUN /usr/local/sbin/lighttpd -V && ldd /usr/local/sbin/lighttpd
 
 FROM busybox
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/lighttpd /usr/local/sbin/lighttpd
 EXPOSE 80

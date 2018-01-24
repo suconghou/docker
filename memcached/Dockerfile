@@ -5,7 +5,7 @@ MEMCACHE_VERSION=memcached-1.5.4 && wget http://www.memcached.org/files/${MEMCAC
 CFLAGS="-O3" && ./configure --disable-docs && make LDFLAGS=-static -j2 && make install && strip -s /usr/local/bin/memcached
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/bin/memcached /usr/local/bin/memcached
 EXPOSE 11211
 

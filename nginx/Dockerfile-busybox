@@ -1,7 +1,7 @@
 FROM suconghou/nginx AS build
 
 FROM busybox
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/nginx /usr/local/sbin/nginx
 COPY --from=build /etc/nginx /etc/nginx
 COPY --from=build /var/log/nginx /var/log/nginx

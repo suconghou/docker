@@ -5,7 +5,7 @@ CFLAGS="-Os -ffunction-sections -fdata-sections" LDFLAGS="-static -Wl,--gc-secti
 RUN strip -s /usr/local/bin/dbclient /usr/local/bin/dropbearconvert /usr/local/bin/dropbearkey /usr/local/sbin/dropbear
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/bin/dbclient /usr/local/bin/dbclient
 COPY --from=build /usr/local/bin/dropbearconvert /usr/local/bin/dropbearconvert
 COPY --from=build /usr/local/bin/dropbearkey /usr/local/bin/dropbearkey

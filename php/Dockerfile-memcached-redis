@@ -19,7 +19,7 @@ php-fpm -t && strip -s /usr/local/sbin/php-fpm && strip -s /usr/local/bin/php &&
 sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini && sed -i '/^;opcache.enable=.*/copcache.enable=1' /etc/php.ini && sed -i '/^;opcache.enable_cli=.*/copcache.enable_cli=1' /etc/php.ini && echo 'zend_extension=opcache.so' >> /etc/php.ini
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/php-fpm /usr/local/sbin/php-fpm
 COPY --from=build /usr/local/bin/php /usr/local/bin/php
 COPY --from=build /usr/local/lib/php/extensions/no-debug-non-zts-20151012/opcache.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012/opcache.so

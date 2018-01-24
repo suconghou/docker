@@ -2,7 +2,7 @@ FROM suconghou/php AS build
 RUN /usr/local/sbin/php-fpm -v
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/php-fpm /usr/local/sbin/php-fpm
 COPY --from=build /usr/local/etc/php-fpm.conf /usr/local/etc/php-fpm.conf
 COPY --from=build /usr/local/etc/php-fpm.d/ /usr/local/etc/php-fpm.d/

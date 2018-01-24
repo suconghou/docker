@@ -2,7 +2,7 @@ FROM suconghou/php AS build
 RUN /usr/local/bin/php -v
 
 FROM alpine
-MAINTAINER suconghou
+LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/bin/php /usr/local/bin/php
 COPY --from=build /etc/php.ini /etc/php.ini
 COPY --from=build /etc/php.ini-development /etc/php.ini-development
