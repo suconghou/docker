@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t=suconghou/redis -t=suconghou/redis:4.0.6 -t=suconghou/redis:alpine . && \
+docker build -t=suconghou/redis -t=suconghou/redis:4.0.7 -t=suconghou/redis:alpine . && \
 docker build -t=suconghou/redis:busybox . -f Dockerfile-busybox
