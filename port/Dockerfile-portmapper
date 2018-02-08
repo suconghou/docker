@@ -1,0 +1,9 @@
+FROM alpine AS build
+RUN apk update && apk upgrade && apk add gcc g++ curl
+RUN curl -sSL https://github.com/wangyu-/tinyPortMapper/releases/download/20171206.1/tinymapper_binaries.tar.gz | tar xz && ls -lha && \
+strip -s tinymapper_amd64 && mv tinymapper_amd64 /portmapper
+
+FROM scratch
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /portmapper /portmapper
+ENTRYPOINT ["/portmapper"]

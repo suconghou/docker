@@ -1,0 +1,7 @@
+FROM suconghou/port AS build
+RUN ls /usr/local/bin/
+
+FROM scratch
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /usr/local/bin/tcpfwd /tcpfwd
+ENTRYPOINT ["/tcpfwd"]
