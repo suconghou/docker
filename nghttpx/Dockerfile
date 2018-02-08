@@ -1,7 +1,7 @@
 FROM alpine AS build
-RUN apk update && apk upgrade && apk add xz wget make file gcc g++ libev-dev zlib-dev openssl-dev c-ares-dev
-RUN wget --no-check-certificate -O nghttp2.tar.xz https://github.com/nghttp2/nghttp2/releases/download/v1.29.0/nghttp2-1.29.0.tar.xz && tar Jxf nghttp2.tar.xz && cd nghttp2-1.29.0 && ls -lha && \
-CFLAGS="-Os -ffunction-sections -fdata-sections" LDFLAGS="-static-libstdc++ -static-libgcc --static -Wl,-Bstatic,--gc-sections" ./configure --disable-python-bindings --disable-examples --disable-shared && \
+RUN apk update && apk upgrade && apk add xz wget make file curl gcc g++ libev-dev zlib-dev openssl-dev c-ares-dev
+RUN curl -sSL https://github.com/nghttp2/nghttp2/releases/download/v1.30.0/nghttp2-1.30.0.tar.xz | tar xJ --strip 1 && ls -lha
+RUN CFLAGS="-Os -ffunction-sections -fdata-sections" LDFLAGS="-static-libstdc++ -static-libgcc --static -Wl,-Bstatic,--gc-sections" ./configure --disable-python-bindings --disable-examples --disable-shared && \
 make LDFLAGS="-static-libstdc++ -static-libgcc --static -Wl,-Bstatic" -j4 && make install && strip -s /usr/local/bin/nghttpx
 
 FROM alpine
