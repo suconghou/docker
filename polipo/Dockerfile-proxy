@@ -1,0 +1,16 @@
+FROM suconghou/polipo AS p
+FROM suconghou/shadowsocks:local AS s
+FROM busybox
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=p /polipo /usr/local/bin/polipo
+COPY --from=s /ss-local /usr/local/bin/ss-local
+ENV chunkHighMark 50331648
+ENV objectHighMark 16384
+ENV pmmFirstSize 163840
+ENV pmmSize 81920
+ENV proxyPort 8123
+ENV socksProxyType socks5
+ENV socksPort 7890
+ENV serverPort 7890
+ENV serverIP 0.0.0.0
+ENTRYPOINT ["/start.sh"]
