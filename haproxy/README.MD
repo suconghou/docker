@@ -4,7 +4,7 @@ haproxy docker image
 
 static build haproxy
 
-haproxy version 1.8.3
+haproxy version 1.8.4
 
 haproxy source code release here http://www.haproxy.org/#down
 
