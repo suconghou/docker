@@ -2,7 +2,7 @@
 
 https://github.com/nghttp2/nghttp2
 
-version 1.23.0
+version 1.31.0
 
 
 
@@ -32,6 +32,12 @@ tls-max-proto-version=TLSv1.2
 ciphers=ECDHE+AES128
 ```
 
-`nghttpx -b 127.0.0.1,8123` 启动
 
+使用 `nghttpx -b 127.0.0.1,8123` 启动
+
+## Dockerfile
+
+https://github.com/suconghou/docker/tree/master/nghttpx
+
+Docker image https://hub.docker.com/r/suconghou/nghttpx/
 
