@@ -12,6 +12,36 @@ docker run --rm -it suconghou/php sh
 ```
 
 
+版本:两个版本 7.1 和 7.2
+
+关于标签
+
+## 7.2
+
+`latest` `7.2.x` 为7.2最新版,包含cli,fpm,包含官方大部分扩展,静态编译
+
+`cli` 从`latest`版本挑出cli部分.
+
+`fpm` 从`latest`版本挑出fpm部分.
+
+`opcache` 此标签与`latest`类似,不同的是包含了`opcache`扩展,并且默认启用
+
+``
+
+
+## 7.1
+
+`7.1.x` 7.1最新版,与7.2`latest`版类似,包含cli,fpm,包含官网大部分扩展,静态编译.
+
+与7.2不同的是,含有`mcrypt`扩展,此扩展在7.2中已废除,7.2推荐使用`openssl`扩展
+
+`7.1.x-opcache` 包含 `opcache`的7.1版
+
+
+
+libevent memcached redis
+
+
 ## php
 
 
