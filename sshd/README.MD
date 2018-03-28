@@ -1,9 +1,15 @@
+### sshd
+
+静态编译sshd
+
+
 ### 编译dropbear
 
 dropbear 是一个更加小巧的sshd
 
 https://matt.ucc.asn.au/dropbear/dropbear.html
 
+静态编译十分容易
 
 `mkdir /etc/dropbear`
 
@@ -13,3 +19,11 @@ https://matt.ucc.asn.au/dropbear/dropbear.html
 
 
 `dbclient` 是一个和ssh类似的客户端
+
+### docker images 
+
+https://hub.docker.com/r/suconghou/sshd/
+
+### dockerfile 
+
+https://github.com/suconghou/docker/tree/master/sshd
