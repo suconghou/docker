@@ -2,7 +2,7 @@
 
 based on alpine
 
-version php7.1.15
+version php7.1.16
 
 
 ## Usage
@@ -26,7 +26,9 @@ docker run --rm -it suconghou/php sh
 
 `opcache` 此标签与`latest`类似,不同的是包含了`opcache`扩展,并且默认启用
 
-``
+`redis` 此标签与`latest`类似,不同的是包含了`redis`扩展和`igbinary`扩展,redis扩展启用igbinary支持,静态编译
+
+并且修改了 php.ini 的 session serialize_handler `session.serialize_handler=igbinary`
 
 
 ## 7.1
@@ -35,7 +37,7 @@ docker run --rm -it suconghou/php sh
 
 与7.2不同的是,含有`mcrypt`扩展,此扩展在7.2中已废除,7.2推荐使用`openssl`扩展
 
-`7.1.x-opcache` 包含 `opcache`的7.1版
+`7.1-opcache` 包含 `opcache`的7.1版
 
 
 

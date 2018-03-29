@@ -2,8 +2,8 @@ FROM alpine AS build
 RUN apk update && apk upgrade && apk add gcc g++ make wget git file openssl-dev pcre-dev zlib-dev
 RUN git clone https://github.com/cuber/ngx_http_google_filter_module
 RUN git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module
-RUN NGINX_VERSION=nginx-1.13.8 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && ls -lha && \
-./configure --with-http_v2_module --with-http_ssl_module --with-stream --with-stream_ssl_preread_module --sbin-path=/usr/local/sbin/nginx --prefix=/etc/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid \
+RUN NGINX_VERSION=nginx-1.13.10 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && ls -lha && \
+./configure --with-http_v2_module --with-http_ssl_module --with-stream --with-stream_ssl_preread_module --sbin-path=/usr/local/sbin/nginx --prefix=/etc/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock \
 --without-select_module \ 
 --without-poll_module \
 --without-http_access_module \
