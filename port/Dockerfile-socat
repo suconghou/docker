@@ -1,0 +1,8 @@
+FROM alpine AS build
+ADD https://github.com/ernw/static-toolbox/raw/master/bin/linux/x86_64/socat /
+RUN chmod +x socat
+
+FROM scratch
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /socat /socat
+ENTRYPOINT ["/socat"]
