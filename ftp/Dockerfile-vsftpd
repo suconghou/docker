@@ -1,0 +1,9 @@
+FROM debian AS build
+RUN apt update -y && apt install wget cmake gcc g++ glibc-source -y
+RUN VSFTPD_VERSION=vsftpd-3.0.3 && wget --no-check-certificate https://security.appspot.com/downloads/${VSFTPD_VERSION}.tar.gz && tar zxf ${VSFTPD_VERSION}.tar.gz && cd ${VSFTPD_VERSION} && ls -lha && \
+make LDFLAGS=-static && strip -s vsftpd && ls -lh vsftpd && mv vsftpd /
+
+
+FROM alpine
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /vsftpd /usr/local/bin/vsftpd
