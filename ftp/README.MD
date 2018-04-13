@@ -18,8 +18,8 @@ static build vsftpd on debian9
 
 ## dockerfile
 
-https://github.com/suconghou/docker/tree/master/bftpd
+https://github.com/suconghou/docker/tree/master/ftp
 
 
-docker image  https://hub.docker.com/r/suconghou/bftpd/
+docker image  https://hub.docker.com/r/suconghou/ftp/
 
