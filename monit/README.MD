@@ -22,3 +22,32 @@ stop  program = "/usr/local/bin/busybox killall redis-server"
 if failed port 6379 then restart
 
 ```
+
+### tags
+
+run `monit -V` see build config
+
+`monit:latest`
+
+```
+This is Monit version 5.25.1
+Built with ssl, with ipv6, with compression, without pam and with large files
+Copyright (C) 2001-2017 Tildeslash Ltd. All Rights Reserved.
+```
+
+
+`monit:slim` is the slim version without largefile and ssl support , only 770KB+
+
+```
+This is Monit version 5.25.1
+Built without ssl, without ipv6, with compression, without pam and without large files
+Copyright (C) 2001-2017 Tildeslash Ltd. All Rights Reserved.
+```
+
+## dockerfile
+
+https://github.com/suconghou/docker/tree/master/monit
+
+
+docker image  https://hub.docker.com/r/suconghou/monit/
+
