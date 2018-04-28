@@ -4,7 +4,7 @@ nodejs docker is very easy , you can just user the `alpine` and run `apk update 
 
 it's node version is v6.2.0 , and with npm,you can update npm and package with `npm update -g`
 
-参考 https://github.com/nodejs/docker-node/blob/master/9/alpine/Dockerfile
+参考 https://github.com/nodejs/docker-node/blob/master/10/alpine/Dockerfile
 
 只需使用 `CFLAGS="-Os -ffunction-sections -fdata-sections" LDFLAGS="-static-libstdc++ -static-libgcc --static -Wl,-Bstatic,--gc-sections"` 即可静态编译
 

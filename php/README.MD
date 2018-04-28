@@ -26,7 +26,7 @@ docker run --rm -it suconghou/php sh
 
 `opcache` 此标签与`latest`类似,不同的是包含了`opcache`扩展,并且默认启用
 
-`redis` 此标签与`latest`类似,不同的是包含了`redis`扩展和`igbinary`扩展,redis扩展启用igbinary支持,静态编译
+`redis` 此标签与`latest`类似,不同的是包含了`redis`扩展和`igbinary,msgpack`扩展,redis扩展启用igbinary支持,静态编译
 
 并且修改了 php.ini 的 session serialize_handler `session.serialize_handler=igbinary`
 
