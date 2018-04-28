@@ -2,7 +2,7 @@
 
 based on alpine
 
-version php7.1.16
+version php7.1.17
 
 
 ## Usage
@@ -37,11 +37,6 @@ docker run --rm -it suconghou/php sh
 
 与7.2不同的是,含有`mcrypt`扩展,此扩展在7.2中已废除,7.2推荐使用`openssl`扩展
 
-`7.1-opcache` 包含 `opcache`的7.1版
-
-
-
-libevent memcached redis
 
 
 ## php

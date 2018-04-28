@@ -20,3 +20,6 @@ echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositorie
 apk upgrade --update
 apk add --no-cache mongodb nodejs
 ```
+
+RUN cd node-v*.*.* && CFLAGS="-Os -ffunction-sections -fdata-sections" LDFLAGS="-static-libstdc++ -static-libgcc --static -Wl,-Bstatic,--gc-sections" ./configure && \
+make -j2 && ls -lha
