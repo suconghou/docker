@@ -10,7 +10,7 @@ proxyAddress = "127.0.0.1"
 proxyPort = 8123
 
 # if you've got plenty of memory
-chunkHighMark = 50331648
+chunkHighMark = 50331648   ## 最大允许使用的内存
 objectHighMark = 16384
 
 # disable the on-disk cache
