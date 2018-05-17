@@ -2,7 +2,7 @@
 
 https://github.com/nghttp2/nghttp2
 
-version 1.31.1
+version 1.32.0
 
 
 
