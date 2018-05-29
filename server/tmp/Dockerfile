@@ -7,4 +7,4 @@ LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/dropbear /frpc /usr/local/bin/
 RUN mkdir -p /etc/dropbear && echo "root:sch" | chpasswd
 ONBUILD RUN /usr/local/bin/dropbear -E -R && \
-frpc stcp -s x.x.x.x:7000 --server_name p2p_ssh --sk abcdefg --bind_addr 127.0.0.1 --bind_port 22
+frpc stcp -s 67.215.245.160:7000 -n p2p_ssh --sk abcdefg -l 22
