@@ -2,7 +2,7 @@
 
 static build nginx
 
-nginx version 1.14.0
+nginx version 1.15.0
 
 ## Usage
 
