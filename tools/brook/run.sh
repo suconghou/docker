@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run --rm -it -p 18123:8123 -p 18123:8123/udp suconghou/tools:brook
+docker run --rm -it -p 18123:18123 -p 18123:18123/udp suconghou/tools:brook
