@@ -7,7 +7,7 @@ libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss
 fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget unzip \
 && apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
-RUN wget https://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/574457/chrome-linux.zip \
+RUN wget https://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/579571/chrome-linux.zip \
 && unzip chrome-linux.zip \
 && rm -rf chrome-linux.zip
 
