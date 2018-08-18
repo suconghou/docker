@@ -5,7 +5,17 @@ http://bftpd.sourceforge.net/
 version 4.9
 
 
-run without config file (use default settings) `bftpd -n -D`
+run without config file (use default settings) `bftpd -n -D`, default port is 21
+
+config file
+```
+global{
+	PORT="8855"
+	LOGFILE="/tmp/1.log"
+	ROOTDIR="/tmp/"
+}
+```
+
 
 ## vsftpd
 
