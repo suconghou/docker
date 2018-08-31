@@ -21,7 +21,7 @@ docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks -k 123456 -p 4
 
 
 ```
-docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks:libev -s 0.0.0.0 -p 443 -k 123456 -m chacha20-ietf-poly1305 -t 300 -d 8.8.8.8 --fast-open -u
+docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks:server -s 0.0.0.0 -p 443 -k 123456 -m chacha20-ietf-poly1305 -t 300 -d 8.8.8.8 --fast-open -u
 ```
 
 `-v` show the version
