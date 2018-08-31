@@ -26,7 +26,7 @@ docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks:libev -s 0.0.0
 
 `-v` show the version
 
-and encryption method is `aes-128-cfb`
+and encryption method is `chacha20-ietf-poly1305`
 
 ## Dockerfile
 
