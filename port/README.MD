@@ -1,6 +1,6 @@
 
 
-portmapper 不支持域名形式的参数 
+portmapper 不支持域名形式的参数
 
 tcpfwd/udpfwd 支持域名形式参数
 
@@ -10,6 +10,17 @@ socat 支持unix socket转换形式
 示例:不修改docker配置, 将docker daemon的 unix socket 以端口的形式暴露出来
 ```
 docker run --rm -p 2367:2367 -v /var/run/docker.sock:/docker.sock suconghou/port:socat TCP-LISTEN:2367,reuseaddr,fork UNIX-CLIENT:/docker.sock
+```
+
+后台运行12367端口
+```
+
+docker run -d \
+-p 12367:12367 \
+-v /var/run/docker.sock:/docker.sock \
+-m 20m \
+--restart always \
+suconghou/port:socat TCP-LISTEN:12367,reuseaddr,fork UNIX-CLIENT:/docker.sock
 ```
 
 
