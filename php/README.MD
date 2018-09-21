@@ -2,7 +2,7 @@
 
 based on alpine
 
-version php7.1.21
+version php7.1.22
 
 
 ## Usage
