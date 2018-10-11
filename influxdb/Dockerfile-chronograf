@@ -1,0 +1,7 @@
+FROM alpine AS build
+RUN wget -O- https://dl.influxdata.com/chronograf/releases/chronograf-1.6.2-static_linux_amd64.tar.gz | tar xz --strip 1
+
+FROM alpine
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /chronoctl /usr/local/bin/
+COPY --from=build /chronograf /usr/local/bin/
