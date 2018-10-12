@@ -7,9 +7,11 @@ https://github.com/jedisct1/dnscrypt-proxy
 ```
 docker run \
 -d \
+-m 20m \
+--restart always \
 --name dnscrypt-proxy \
--p 5353:53/tcp \
--p 5353:53/udp \
+-p 53:53/tcp \
+-p 53:53/udp \
 suconghou/dnscrypt-proxy
 ```
 

@@ -1,5 +1,5 @@
 
-listen_addresses = ['127.0.0.1:53']
+listen_addresses = ['0.0.0.0:53']
 
 max_clients = 250
 
