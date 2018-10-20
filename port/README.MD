@@ -29,6 +29,13 @@ socat 文件来源于 https://github.com/ernw/static-toolbox
 
 redir 仅支持TCP
 
+teeproxy
+
+https://github.com/kklis/proxy
+
+
+`proxy -l 9077 -h 61.135.169.125 -p 80 -f -i "tee /dev/stderr " -o "tee /dev/stderr"`
+
 
 ## docker images
 
