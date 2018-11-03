@@ -1,6 +1,6 @@
 FROM alpine AS build
 RUN apk add binutils && \
-wget -O- https://github.com/snail007/goproxy/releases/download/v6.3/proxy-linux-amd64.tar.gz | tar xz && \
+wget -O- https://github.com/snail007/goproxy/releases/download/v6.4/proxy-linux-amd64.tar.gz | tar xz && \
 strip -s proxy
 
 FROM alpine
