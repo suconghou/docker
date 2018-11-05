@@ -1,6 +1,6 @@
 FROM alpine AS build
-ADD https://github.com/txthinking/brook/releases/download/v20180707/brook /brook
-RUN chmod +x /brook
+ADD https://github.com/txthinking/brook/releases/download/v20180909/brook /brook
+RUN apk add binutils && chmod +x brook && strip -s brook
 
 FROM scratch
 LABEL maintainer="suconghou@gmail.com"
