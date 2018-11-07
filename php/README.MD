@@ -49,6 +49,9 @@ redis 扩展启用 igbinary 支持,静态编译
 `opcache` 此标签与`latest`类似,不同的是包含了`opcache`扩展,并且默认启用
 `swoole`
 
+
+`--with-mcrypt, --enable-gd-native-ttf` 这两个参数php7.2已经被废弃
+
 ## 7.1
 
 `7.1.x` 7.1 最新版,与 7.2`latest`版类似,包含 cli,fpm,包含官网大部分扩展,静态编译.
