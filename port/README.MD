@@ -27,6 +27,8 @@ suconghou/port:socat TCP-LISTEN:12367,reuseaddr,fork UNIX-CLIENT:/docker.sock
 
 socat 文件来源于 https://github.com/ernw/static-toolbox , 其工程还提供 ncat , nmap, nping 等静态编译后的可执行文件
 
+https://github.com/andrew-d/static-binaries/tree/master/binaries/linux/x86_64 旧版本静态编译 socat 仅300KB+
+
 redir 仅支持TCP
 
 teeproxy
