@@ -1,4 +1,4 @@
-FROM alpine AS build
+FROM arm32v6/alpine AS build
 RUN apk update && apk upgrade && apk add gcc g++ make file curl autoconf linux-headers libev-dev libtool c-ares-dev pcre-dev python
 RUN LIBSODIUM_VER=1.0.16 && curl -sSL https://download.libsodium.org/libsodium/releases/libsodium-$LIBSODIUM_VER.tar.gz | tar xz && cd libsodium-${LIBSODIUM_VER} && ls -lha && ./configure --prefix=/usr && make -j2 && make install
 RUN MBEDTLS_VER=2.14.0 && curl -sSL https://tls.mbed.org/download/mbedtls-$MBEDTLS_VER-gpl.tgz | tar xz && cd mbedtls-$MBEDTLS_VER && ls -lha && make SHARED=1 CFLAGS=-fPIC && make DESTDIR=/usr install
@@ -7,7 +7,7 @@ CFLAGS=-Os && ./configure --prefix=/usr/local --enable-static --disable-document
 sed -i "s/LDFLAGS = /LDFLAGS = -all-static/g" ./src/Makefile && sed -i "s/LDFLAGS = /LDFLAGS = -all-static/g" ./Makefile && make -j2 && make install && \
 strip -s /usr/local/bin/ss-server /usr/local/bin/ss-local /usr/local/bin/ss-tunnel /usr/local/bin/ss-redir /usr/local/bin/ss-manager 
 
-FROM busybox
+FROM arm32v6/alpine
 LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/bin/ss-server /usr/local/bin/ss-server
 COPY --from=build /usr/local/bin/ss-local /usr/local/bin/ss-local

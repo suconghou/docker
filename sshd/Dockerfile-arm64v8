@@ -1,0 +1,16 @@
+FROM arm64v8/alpine AS build
+RUN apk update && apk upgrade && apk add gcc g++ make zlib-dev openssl-dev
+RUN OPENSSH_VERSION=openssh-7.9p1 && wget http://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/${OPENSSH_VERSION}.tar.gz && tar xzf ${OPENSSH_VERSION}.tar.gz && cd ${OPENSSH_VERSION} && ls -lha && \
+./configure && make -j2 CFLAGS=-Os LDFLAGS="-static -L./ -L./openbsd-compat/" && make install
+RUN strip -s /usr/local/bin/ssh /usr/local/bin/scp /usr/local/bin/sftp /usr/local/bin/ssh-keygen /usr/local/sbin/sshd
+
+FROM arm64v8/alpine
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /usr/local/bin/ssh /usr/local/bin/ssh
+COPY --from=build /usr/local/bin/scp /usr/local/bin/scp
+COPY --from=build /usr/local/bin/sftp /usr/local/bin/sftp
+COPY --from=build /usr/local/bin/ssh-keygen /usr/local/bin/ssh-keygen
+COPY --from=build /usr/local/sbin/sshd /usr/local/sbin/sshd
+RUN mkdir -p /usr/local/etc/ && echo 'PermitRootLogin  yes' > /usr/local/etc/sshd_config && ssh-keygen -t dsa -f /usr/local/etc/ssh_host_dsa_key -N '' && ssh-keygen -t rsa -f /usr/local/etc/ssh_host_rsa_key -N '' && ssh-keygen -t ecdsa -f /usr/local/etc/ssh_host_ecdsa_key -N '' && ssh-keygen -t ed25519 -f /usr/local/etc/ssh_host_ed25519_key -N '' && echo "root:sch@dockerssh" | chpasswd
+CMD ["/usr/local/sbin/sshd","-D"]
+EXPOSE 22
