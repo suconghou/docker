@@ -1,4 +1,4 @@
-FROM arm64v8/alpine AS build
+FROM arm32v6/alpine AS build
 RUN apk update && apk upgrade && apk add gcc g++ make wget file xz autoconf pcre-dev zlib-dev jpeg-dev libpng-dev bzip2-dev openssl-dev
 RUN LIBXML2_VERSION=libxml2-2.9.8 && wget ftp://xmlsoft.org/libxml2/${LIBXML2_VERSION}.tar.gz && tar zxf ${LIBXML2_VERSION}.tar.gz && cd ${LIBXML2_VERSION} && ./configure && make -j2 && make install
 RUN LIBXSLT_VERSION=libxslt-1.1.32 && wget ftp://xmlsoft.org/libxslt/${LIBXSLT_VERSION}.tar.gz && tar zxf ${LIBXSLT_VERSION}.tar.gz && cd ${LIBXSLT_VERSION} && ./configure && make -j2 && make install
@@ -21,7 +21,7 @@ sed -i '/^;request_slowlog_timeout.*/crequest_slowlog_timeout = 5' /usr/local/et
 php-fpm -t && strip -s /usr/local/sbin/php-fpm && strip -s /usr/local/bin/php && cp php.ini-production /etc/php.ini && \
 sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini && sed -i '/^session.serialize_handler.*/csession.serialize_handler = igbinary' /etc/php.ini
 
-FROM arm64v8/alpine
+FROM arm32v6/alpine
 LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/sbin/php-fpm /usr/local/sbin/php-fpm
 COPY --from=build /usr/local/bin/php /usr/local/bin/php
