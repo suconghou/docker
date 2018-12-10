@@ -3,7 +3,7 @@
 
 shadowsocks-go version 1.2.1
 
-shadowsocks-libev version 3.2.1
+shadowsocks-libev version 3.2.3
 
 ## Usage
 
