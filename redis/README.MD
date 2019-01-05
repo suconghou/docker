@@ -33,3 +33,22 @@ or
 with password auth
 
 `redis-server --protected-mode no --daemonize yes --requirepass QAZwsx123edcvfr654JKL`
+
+docker volume create redis-data
+
+docker network create --driver overlay --attachable srv
+
+```
+docker run -d \
+--name redis \
+--restart always \
+-m 100m \
+--network srv \
+-v redis-data:/data \
+-e TZ="CST-8" \
+--sysctl net.core.somaxconn=1024 \
+-p 0.0.0.0:16379:6379 \
+suconghou/redis:4.0.11 \
+redis-server /etc/redis.conf --requirepass password --dir /data
+
+```
