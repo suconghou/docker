@@ -1,21 +1,19 @@
 ## Shadowsocks docker
 
 
-shadowsocks-go version 1.2.1
+shadowsocks-rust version 1.2.1
 
 shadowsocks-libev version 3.2.3
 
 ## Usage
 
-**shadowsocks-go**
+**shadowsocks-rust**
 
 start docker
 ```
-docker run --name shadowsocks -d -p 443:443 suconghou/shadowsocks -k 123456 -p 443 -m aes-128-cfb -t 300
+docker run --name shadowsocks -d -p 443:8388 suconghou/shadowsocks -k 123456 -s "[::]:8388" -m aes-256-gcm
 ```
-`-k` is the password, `-p` is the server port , and  encryption method is `aes-128-cfb`
 
-`--version` show the version
 
 **shadowsocks-libev**
 
@@ -31,8 +29,6 @@ and encryption method is `chacha20-ietf-poly1305`
 ## Dockerfile
 
 https://github.com/suconghou/docker/tree/master/shadowsocks
-
-the binary file is from https://github.com/shadowsocks/shadowsocks-go and is stripped
 
 docker images
 

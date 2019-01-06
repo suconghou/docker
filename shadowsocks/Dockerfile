@@ -1,10 +1,9 @@
 FROM alpine as build 
-RUN apk update && apk add binutils file
-ADD https://github.com/shadowsocks/shadowsocks-go/releases/download/1.2.1/shadowsocks-server.tar.gz shadowsocks.tar.gz
-RUN tar zxf shadowsocks.tar.gz && strip -s shadowsocks-server && /shadowsocks-server -version
-FROM scratch
+RUN apk add --update binutils
+RUN wget -O- https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.7.0-alpha.19/shadowsocks-v1.7.0-alpha.19-nightly.x86_64-unknown-linux-musl.tar.xz | tar Jx && \
+strip -s ssdns sslocal ssserver ssurl
+FROM alpine
 LABEL maintainer="suconghou@gmail.com"
-COPY --from=build /shadowsocks-server /
-ENTRYPOINT ["/shadowsocks-server"]
-EXPOSE 443
+COPY --from=build ssdns sslocal ssserver ssurl /usr/local/bin/
+ENTRYPOINT ["/usr/local/bin/ssserver"]
 
