@@ -14,14 +14,14 @@ docker network create influx
 
 
 ```
-docker run --name influxdb -m 200m --rm -it -p 8086:8086 --net influx suconghou/influxdb
+docker run --name influxdb -m 300m --rm -it -p 8086:8086 --net influx suconghou/influxdb
 ```
 
 
 
 ```
 docker run --name influxdb \
--m 200m \
+-m 300m \
 --restart always \
 -d \
 -p 127.0.0.1:8086:8086 \
@@ -30,6 +30,42 @@ suconghou/influxdb
 ```
 
 ### telegraf
+
+```
+[global_tags]
+    dc="hw"
+[agent]
+    interval = "10s"
+    round_interval = true
+    metric_batch_size = 1000
+    metric_buffer_limit = 10000
+    collection_jitter = "0s"
+    flush_interval = "10s"
+    flush_jitter = "0s"
+    precision = ""
+    debug = false
+    quiet = false
+    logfile = ""
+    hostname = "hw-209"
+    omit_hostname = false
+[[outputs.influxdb]]
+    urls = ["http://172.16.0.148:8086"]
+[[inputs.docker_log]]
+    endpoint = "unix:///var/run/docker.sock"
+
+[[inputs.cpu]]
+    percpu = true
+    totalcpu = true
+    collect_cpu_time = false
+    report_active = false
+[[inputs.disk]]
+    ignore_fs = ["tmpfs", "devtmpfs", "devfs", "overlay", "aufs", "squashfs"]
+[[inputs.kernel]]
+[[inputs.mem]]
+[[inputs.processes]]
+[[inputs.swap]]
+[[inputs.system]]
+```
 
 
 2018-12-25T09:05:49Z I! Starting Telegraf 
