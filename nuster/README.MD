@@ -6,7 +6,7 @@ nuster docker image
 
 static build nuster
 
-nuster version 2.0.4.18
+nuster version 2.0.6.18
 
 
 ## Dockerfile
