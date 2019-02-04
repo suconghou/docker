@@ -14,7 +14,7 @@ wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat
 ```
 
 ```
-docker run --rm -it -m 60m \
+docker run --rm -it -m 160m \
 -p 127.0.0.1:7890:7890 \
 -v /var/log/nginx:/data \
 -v /data/db:/data/db \
@@ -24,7 +24,7 @@ goaccess /data/access.log \
 --log-format=COMBINED \
 --real-time-html \
 --geoip-database /data/db/GeoIP.dat \
---ws-url ws://domain.com:80/ws
+--ws-url ws://report.tuwenzhibo.com:80/ws
 ```
 
 
