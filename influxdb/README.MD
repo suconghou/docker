@@ -24,10 +24,12 @@ docker run --name influxdb \
 -m 300m \
 --restart always \
 -d \
--p 127.0.0.1:8086:8086 \
+-p 0.0.0.0:8086:8086 \
 --net influx \
 suconghou/influxdb
 ```
+
+
 
 ### telegraf
 

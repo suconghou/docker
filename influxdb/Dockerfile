@@ -1,9 +1,9 @@
 FROM alpine AS build
 RUN apk add --update binutils
-RUN wget -O- https://dl.influxdata.com/influxdb/releases/influxdb-1.7.3-static_linux_amd64.tar.gz | tar xz --strip 2 && \
+RUN wget -O- https://dl.influxdata.com/influxdb/releases/influxdb-1.7.4-static_linux_amd64.tar.gz | tar xz --strip 2 && \
 strip -s influxd influx && \
 /influxd config > /influxdb.conf && \
-sed -i '/.*auth-enabled = false.*/c    auth-enabled = true' /influxdb.conf
+sed -i 's/auth-enabled.*/auth-enabled = true/g' /influxdb.conf
 
 
 FROM alpine
