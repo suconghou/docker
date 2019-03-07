@@ -38,7 +38,7 @@ redis 扩展启用 igbinary 支持,静态编译
 
 并且修改了 php.ini 的 session serialize_handler `session.serialize_handler=igbinary`
 
-`swoole` `swoole_4.2.x` 此标签与`redis`类似,不同的是在其基础上包含了
+`swoole` `swoole_4.x.x` 此标签与`redis`类似,不同的是在其基础上包含了
 
 - swoole
 
@@ -65,7 +65,7 @@ redis 扩展启用 igbinary 支持,静态编译
 
 并且修改了 php.ini 的 session serialize_handler `session.serialize_handler=igbinary`
 
-`72_swoole` `72_swoole_4.2.x` 此标签与`72_redis`类似,不同的是在其基础上包含了
+`72_swoole` `72_swoole_4.x.x` 此标签与`72_redis`类似,不同的是在其基础上包含了
 
 - swoole
 
