@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t=suconghou/sshd -t=suconghou/sshd:7.9p1 .
+docker build -t=suconghou/sshd -t=suconghou/sshd:8.0p1 .
