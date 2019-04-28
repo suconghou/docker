@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t=suconghou/nghttpx -t=suconghou/nghttpx:1.37.0 .
+docker build -t=suconghou/nghttpx -t=suconghou/nghttpx:1.38.0 .
