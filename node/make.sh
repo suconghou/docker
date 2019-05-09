@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t=suconghou/node -t=suconghou/node:12.1.0  .
+docker build -t=suconghou/node -t=suconghou/node:12.2.0  .
 
