@@ -9,5 +9,6 @@ LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/openresty/nginx/sbin/nginx /usr/local/sbin/nginx
 COPY --from=build /usr/local/openresty/nginx/conf/nginx.conf usr/local/openresty/nginx/conf/fastcgi.conf /usr/local/openresty/nginx/conf/mime.types /usr/local/openresty/nginx/conf/scgi_params /usr/local/openresty/nginx/conf/
 COPY --from=build /usr/local/openresty/nginx/logs/ /usr/local/openresty/nginx/logs/
+COPY --from=build /usr/local/openresty/lualib /usr/local/openresty/lualib 
 RUN ln -sf /dev/stdout /usr/local/openresty/nginx/logs/access.log && \
 ln -sf /dev/stderr /usr/local/openresty/nginx/logs/error.log
