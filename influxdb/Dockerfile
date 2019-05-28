@@ -5,9 +5,9 @@ strip -s influxd influx && \
 /influxd config > /influxdb.conf && \
 sed -i 's/auth-enabled.*/auth-enabled = true/g' /influxdb.conf && \
 sed -i 's/reporting-disabled.*/reporting-disabled = true/g' /influxdb.conf && \
-sed -i 's/wal-fsync-delay.*/wal-fsync-delay = "200ms"/g' /influxdb.conf && \
+sed -i 's/wal-fsync-delay.*/wal-fsync-delay = "2000ms"/g' /influxdb.conf && \
 sed -i 's/index-version.*/index-version = "tsi1"/g' /influxdb.conf && \
-sed -i 's/cache-max-memory-size.*/cache-max-memory-size = 268435456/g' /influxdb.conf
+sed -i 's/cache-max-memory-size.*/cache-max-memory-size = 104857600/g' /influxdb.conf
 
 FROM alpine
 LABEL maintainer="suconghou@gmail.com"
