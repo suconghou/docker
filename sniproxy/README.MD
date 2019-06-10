@@ -5,6 +5,10 @@ static build sniproxy
 version 0.6.0
 
 
+```
+sniproxy -c /etc/sniproxy.conf -f
+```
+
 
 ## Dockerfile
 
