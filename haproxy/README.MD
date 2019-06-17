@@ -4,7 +4,7 @@ haproxy docker image
 
 static build haproxy
 
-haproxy version 1.8.14
+haproxy version 1.8.20
 
 haproxy source code release here http://www.haproxy.org/#down
 
@@ -21,3 +21,4 @@ make TARGET=linux2628 ARCH=X86_64 USE_STATIC_PCRE=1 USE_PCRE_JIT=1 USE_ZLIB=1 LD
 ```
 
 在 busybox 系统中运行时没有nobody组，可以 `addgroup nobody`添加该组
+https://www.cnblogs.com/mcsiberiawolf/articles/10796014.html
