@@ -11,10 +11,22 @@ https://portal.influxdata.com/downloads
 docker network create influx
 ```
 
+use 
+```
+sed -i 's/cache-max-memory-size.*/cache-max-memory-size = 268435456/g' /influxdb.conf
+```
+to make it use less memory, max cache 256M
+
+if you are on a heavy load give more memory
+
+1024M
+```
+sed -i 's/cache-max-memory-size.*/cache-max-memory-size = 1073741824/g' /influxdb.conf
+```
 
 
 ```
-docker run --name influxdb -m 300m --rm -it -p 8086:8086 --net influx suconghou/influxdb
+docker run --name influxdb -m 500m --rm -it -p 8086:8086 --net influx suconghou/influxdb
 ```
 
 
