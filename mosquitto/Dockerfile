@@ -7,6 +7,8 @@ strip -s /usr/local/bin/* && strip -s /usr/local/sbin/*
 
 FROM alpine
 LABEL maintainer="suconghou@gmail.com"
+RUN adduser -HDG nobody -h / -s /sbin/nologin -g mosquitto mosquitto
 COPY --from=build /usr/local/sbin/mosquitto /usr/local/sbin/
 COPY --from=build /usr/local/bin/mosquitto* /usr/local/bin/
 COPY --from=build /usr/local/lib/libmosquitto.so.1 /usr/local/lib/libmosquitto.so.1
+CMD [ "mosquitto" ]
