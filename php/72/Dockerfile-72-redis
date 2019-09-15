@@ -2,7 +2,7 @@ FROM alpine AS build
 RUN apk update && apk upgrade && apk add gcc g++ make cmake wget file xz bison autoconf pcre-dev zlib-dev libjpeg-turbo-dev libpng-static libpng-dev bzip2-dev openssl-dev
 RUN LIBXML2_VERSION=libxml2-2.9.9 && wget http://xmlsoft.org/sources/${LIBXML2_VERSION}.tar.gz && tar zxf ${LIBXML2_VERSION}.tar.gz && cd ${LIBXML2_VERSION} && ./configure && make -j4 && make install
 RUN LIBXSLT_VERSION=libxslt-1.1.33 && wget http://xmlsoft.org/sources/${LIBXSLT_VERSION}.tar.gz && tar zxf ${LIBXSLT_VERSION}.tar.gz && cd ${LIBXSLT_VERSION} && ./configure && make -j4 && make install
-RUN CURL_VERSION=curl-7.65.3 && wget --no-check-certificate https://curl.haxx.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure && make -j4 && make install
+RUN CURL_VERSION=curl-7.66.0 && wget --no-check-certificate https://curl.haxx.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure && make -j4 && make install
 RUN LIBFREETYPE_VERSION=freetype-2.10.1 && wget --no-check-certificate https://download-mirror.savannah.gnu.org/releases/freetype/${LIBFREETYPE_VERSION}.tar.gz && tar zxf ${LIBFREETYPE_VERSION}.tar.gz && cd ${LIBFREETYPE_VERSION} && ./configure && make -j4 && make install && ln -s $(pwd)/builds/unix/freetype-config /usr/local/bin/freetype-config
 RUN IMAGEMAGICK_VERSION=7.0.8-63 && wget -O- https://github.com/ImageMagick/ImageMagick/archive/${IMAGEMAGICK_VERSION}.tar.gz | tar xz && cd ImageMagick-${IMAGEMAGICK_VERSION} && ./configure --without-threads && make -j8 && make install
 RUN PHP_VERSION=php-7.2.22 && wget https://www.php.net/distributions/${PHP_VERSION}.tar.xz && tar xJf ${PHP_VERSION}.tar.xz && cd ${PHP_VERSION}

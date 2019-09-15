@@ -1,9 +1,9 @@
-FROM arm32v6/alpine AS build
+FROM multiarch/alpine:armhf-edge AS build
 RUN apk update && apk upgrade && apk add gcc g++ make wget linux-headers
 RUN REDIS_VERSION=redis-5.0.5 && wget http://download.redis.io/releases/${REDIS_VERSION}.tar.gz && tar xzf ${REDIS_VERSION}.tar.gz && cd ${REDIS_VERSION} && \
 make LDFLAGS=-static -j2 && make install && strip -s /usr/local/bin/* && mv redis.conf /etc/redis.conf
 
-FROM arm32v6/alpine
+FROM arm32v7/alpine
 LABEL maintainer="suconghou@gmail.com"
 COPY --from=build /usr/local/bin/ /usr/local/bin/
 COPY --from=build /etc/redis.conf /etc/redis.conf
