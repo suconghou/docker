@@ -1,6 +1,6 @@
 FROM alpine AS build
 RUN apk add --update gcc g++ make openssl-dev
-RUN wget -O- https://github.com/eclipse/mosquitto/archive/v1.6.4.tar.gz | tar xz && \
+RUN wget -O- https://github.com/eclipse/mosquitto/archive/v1.6.6.tar.gz | tar xz && \
 cd mosquitto-* && \
 make binary -j2 WITH_DOCS=no WITH_BUNDLED_DEPS=no && (make install || true) && \
 strip -s /usr/local/bin/* && strip -s /usr/local/sbin/*
