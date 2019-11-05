@@ -33,6 +33,7 @@ docker run --name influxdb -m 500m --rm -it -p 8086:8086 --net influx suconghou/
 
 ```
 docker run --name influxdb \
+--log-opt max-size=2m \
 -m 300m \
 --restart always \
 -d \
