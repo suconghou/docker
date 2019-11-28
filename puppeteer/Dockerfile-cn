@@ -1,0 +1,8 @@
+FROM suconghou/puppeteer
+LABEL maintainer="suconghou@gmail.com"
+RUN apk add --no-cache nss freetype freetype-dev harfbuzz ca-certificates ttf-freefont
+RUN cd /usr/share/fonts/ && \
+wget https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack/raw/master/fonts/wqy-zenhei.ttc && \
+wget https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack/raw/master/fonts/wqy-microhei.ttc && \
+wget https://github.com/joypixels/emojione-assets/releases/download/4.5/emojione-android.ttf && \
+fc-cache -f /usr/share/fonts/
