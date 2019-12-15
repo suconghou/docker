@@ -1,9 +1,9 @@
 FROM alpine AS build
 RUN apk add --update gcc g++ make openssl-dev
-RUN wget -O- https://github.com/eclipse/mosquitto/archive/v1.6.7.tar.gz | tar xz && \
-cd mosquitto-* && \
-make binary -j2 WITH_DOCS=no WITH_BUNDLED_DEPS=no && (make install || true) && \
-strip -s /usr/local/bin/* && strip -s /usr/local/sbin/*
+RUN wget -O- https://github.com/eclipse/mosquitto/archive/v.1.6.8.tar.gz | tar xz && \
+    cd mosquitto-* && \
+    make binary -j2 WITH_DOCS=no WITH_BUNDLED_DEPS=no && (make install || true) && \
+    strip -s /usr/local/bin/* && strip -s /usr/local/sbin/*
 
 FROM alpine
 LABEL maintainer="suconghou@gmail.com"
