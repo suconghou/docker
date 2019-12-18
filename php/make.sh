@@ -1,4 +1,4 @@
 #!/bin/bash
-docker build -t=suconghou/php -t=suconghou/php:7.4.0 . && \
+docker build -t=suconghou/php -t=suconghou/php:7.4.1 . && \
 docker build -t=suconghou/php:cli . -f Dockerfile-cli && \
 docker build -t=suconghou/php:fpm . -f Dockerfile-fpm
