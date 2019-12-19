@@ -1,6 +1,6 @@
 FROM suconghou/node
 LABEL maintainer="suconghou@gmail.com"
-RUN YARN_VERSION=1.19.1 && mkdir -p /opt/yarn/ \
+RUN YARN_VERSION=1.21.1 && mkdir -p /opt/yarn/ \
 && wget -O- --no-check-certificate https://npm.taobao.org/mirrors/yarn/v$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz | tar xz --strip 1 -C /opt/yarn \
 && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn \
 && ln -s /opt/yarn/bin/yarnpkg /usr/local/bin/yarnpkg
