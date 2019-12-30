@@ -1,5 +1,5 @@
 FROM alpine AS build
-RUN apk add --update gcc g++ make openssl-dev
+RUN apk add --update gcc g++ make openssl-dev openssl-libs-static
 RUN wget -O- https://github.com/eclipse/mosquitto/archive/v.1.6.8.tar.gz | tar xz && \
     cd mosquitto-* && \
     make binary -j2 WITH_DOCS=no WITH_BUNDLED_DEPS=no && (make install || true) && \

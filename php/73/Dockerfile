@@ -1,5 +1,5 @@
 FROM alpine AS build
-RUN apk update && apk upgrade && apk add gcc g++ make cmake wget file xz bison autoconf pcre-dev zlib-dev libjpeg-turbo-dev libpng-static libpng-dev bzip2-dev openssl-dev
+RUN apk update && apk upgrade && apk add gcc g++ make cmake wget file xz bison autoconf pcre-dev zlib-dev zlib-static libjpeg-turbo-dev libjpeg-turbo-static libpng-static libpng-dev bzip2-dev bzip2-static openssl-dev openssl-libs-static
 RUN LIBXML2_VERSION=libxml2-2.9.10 && wget http://xmlsoft.org/sources/${LIBXML2_VERSION}.tar.gz && tar zxf ${LIBXML2_VERSION}.tar.gz && cd ${LIBXML2_VERSION} && ./configure && make -j4 && make install
 RUN LIBXSLT_VERSION=libxslt-1.1.34 && wget http://xmlsoft.org/sources/${LIBXSLT_VERSION}.tar.gz && tar zxf ${LIBXSLT_VERSION}.tar.gz && cd ${LIBXSLT_VERSION} && ./configure && make -j4 && make install
 RUN CURL_VERSION=curl-7.67.0 && wget --no-check-certificate https://curl.haxx.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure && make -j4 && make install

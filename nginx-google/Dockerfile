@@ -1,5 +1,5 @@
 FROM alpine AS build
-RUN apk update && apk upgrade && apk add gcc g++ make wget git file openssl-dev pcre-dev zlib-dev
+RUN apk update && apk upgrade && apk add gcc g++ make wget git file openssl-dev openssl-libs-static pcre-dev zlib-dev zlib-static
 RUN git clone https://github.com/cuber/ngx_http_google_filter_module
 RUN git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module
 RUN NGINX_VERSION=nginx-1.13.10 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && ls -lha && \

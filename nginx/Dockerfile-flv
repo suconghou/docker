@@ -1,5 +1,5 @@
-FROM alpine:3.10 AS build
-RUN apk update && apk upgrade && apk add gcc g++ make wget file openssl-dev pcre-dev zlib-dev
+FROM alpine AS build
+RUN apk update && apk upgrade && apk add gcc g++ make wget file openssl-dev openssl-libs-static pcre-dev zlib-dev zlib-static
 RUN NGINX_VERSION=nginx-1.17.7 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && \
 wget -O- https://github.com/winshining/nginx-http-flv-module/archive/v1.2.7.tar.gz | tar xz && \
 wget -O- https://github.com/kaltura/nginx-vod-module/archive/1.25.tar.gz | tar xz && \
