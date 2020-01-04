@@ -5,4 +5,4 @@ RUN wget -O- https://github.com/q3aql/aria2-static-builds/releases/download/v1.3
 FROM alpine
 COPY --from=build /aria2c /usr/local/bin/
 COPY --from=build /ca-certificates.crt /etc/ssl/certs/
-CMD [ "aria2c","--dir=/data/share","--file-allocation=trunc","--disable-ipv6=true","--enable-rpc=true","--rpc-allow-origin-all=true","--rpc-listen-all=true","--rpc-secret=will2020" ]
+CMD [ "aria2c","--dir=/data/share","--continue=true","--stream-piece-selector=inorder","--file-allocation=none","--disable-ipv6=true","--enable-rpc=true","--rpc-allow-origin-all=true","--rpc-listen-all=true","--rpc-secret=will2020" ]
