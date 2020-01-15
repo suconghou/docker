@@ -39,6 +39,12 @@ https://github.com/kklis/proxy
 `proxy -l 9077 -h 61.135.169.125 -p 80 -f -i "tee /dev/stderr " -o "tee /dev/stderr"`
 
 
+## rinetd
+
+https://github.com/samhocevar/rinetd
+
+rinetd并没有使用epoll，而是用了select，高负载下将消耗较多CPU。
+
 ## docker images
 
 https://hub.docker.com/r/suconghou/port/
