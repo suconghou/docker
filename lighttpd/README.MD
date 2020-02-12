@@ -4,7 +4,7 @@ lighttpd docker image
 
 http://download.lighttpd.net/lighttpd/releases-1.4.x/
 
-lighttpd version 1.4.54
+lighttpd version 1.4.55
 
 
 ## dockerfile
