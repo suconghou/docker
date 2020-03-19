@@ -1,9 +1,9 @@
 ## Shadowsocks docker
 
 
-shadowsocks-rust version 1.7.2
+shadowsocks-rust version 1.8.9
 
-shadowsocks-libev version 3.3.3
+shadowsocks-libev version 3.3.4
 
 ## Usage
 
