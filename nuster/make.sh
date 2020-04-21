@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t=suconghou/nuster -t=suconghou/nuster:3.2.2.19 .
+docker build -t=suconghou/nuster -t=suconghou/nuster:5.0.1.21 .
