@@ -64,7 +64,7 @@ suconghou/influxdb
     hostname = "hw-209"
     omit_hostname = false
 [[outputs.influxdb]]
-    urls = ["http://172.16.0.148:8086"]
+    urls = ["http://172.16.0.348:8086"]
 [[inputs.docker_log]]
     endpoint = "unix:///var/run/docker.sock"
 
