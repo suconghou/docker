@@ -1,0 +1,4 @@
+FROM python:alpine
+RUN apk add --no-cache gcc g++ make zlib-dev libjpeg-turbo-dev libwebp-dev freetype-dev
+RUN CC="cc -mavx2" pip3 install pillow-simd qrcode
+
