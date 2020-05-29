@@ -34,6 +34,7 @@ docker run --rm -it suconghou/php sh
 - igbinary
 - msgpack
 - imagick
+- apcu
 
 redis 扩展启用 igbinary 支持,静态编译
 
@@ -61,6 +62,7 @@ redis 扩展启用 igbinary 支持,静态编译
 - igbinary
 - msgpack
 - imagick
+- apcu
 
 redis 扩展启用 igbinary 支持,静态编译
 
