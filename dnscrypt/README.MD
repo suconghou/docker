@@ -10,8 +10,8 @@ docker run \
 -m 20m \
 --restart always \
 --name dnscrypt-proxy \
--p 53:53/tcp \
--p 53:53/udp \
+-p 192.168.0.5:53:53/tcp \
+-p 192.168.0.5:53:53/udp \
 suconghou/dnscrypt-proxy
 ```
 
