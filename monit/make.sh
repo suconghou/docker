@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t=suconghou/monit -t=suconghou/monit:5.26.0 .
+docker build -t=suconghou/monit -t=suconghou/monit:5.27.0 .

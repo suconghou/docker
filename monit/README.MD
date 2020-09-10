@@ -2,7 +2,7 @@
 
 https://mmonit.com/monit/
 
-version 5.26.0
+version 5.27.0
 
 example config file
 
@@ -30,7 +30,7 @@ run `monit -V` see build config
 `monit:latest`
 
 ```
-This is Monit version 5.26.0
+This is Monit version 5.27.0
 Built with ssl, with ipv6, with compression, without pam and with large files
 Copyright (C) 2001-2018 Tildeslash Ltd. All Rights Reserved.
 ```
@@ -39,7 +39,7 @@ Copyright (C) 2001-2018 Tildeslash Ltd. All Rights Reserved.
 `monit:slim` is the slim version without largefile and ssl support , only 770KB+
 
 ```
-This is Monit version 5.26.0
+This is Monit version 5.27.0
 Built without ssl, without ipv6, with compression, without pam and without large files
 Copyright (C) 2001-2018 Tildeslash Ltd. All Rights Reserved.
 ```
