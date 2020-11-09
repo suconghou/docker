@@ -3,7 +3,7 @@
 
 shadowsocks-rust version 1.8.9
 
-shadowsocks-libev version 3.3.4
+shadowsocks-libev version 3.3.5
 
 ## Usage
 

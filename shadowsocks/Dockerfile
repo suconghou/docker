@@ -1,6 +1,6 @@
 FROM alpine as build 
 RUN apk add --update binutils
-RUN wget -O- https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.8.16/shadowsocks-v1.8.16.x86_64-unknown-linux-musl.tar.xz | tar Jx && \
+RUN wget -O- https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.8.23/shadowsocks-v1.8.23.x86_64-unknown-linux-musl.tar.xz | tar Jx && \
 strip -s sslocal ssserver
 FROM alpine
 LABEL maintainer="suconghou@gmail.com"
