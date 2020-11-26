@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t=suconghou/php:7.3.24_redis . -f Dockerfile-redis
+docker build -t=suconghou/php:7.3.25_redis . -f Dockerfile-redis
