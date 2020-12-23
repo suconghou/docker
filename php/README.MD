@@ -46,11 +46,6 @@ redis 扩展启用 igbinary 支持,静态编译
 
 此标签内不包含fpm
 
-`xhprof` 此标签与`redis`类似,不同的是在其基础上包含了
-
-- xhprof
-
-
 
 ## 7.3
 
@@ -126,3 +121,11 @@ https://hub.docker.com/r/suconghou/php/
 ## dockerfile
 
 https://github.com/suconghou/docker/tree/master/php
+
+
+
+国内构建 可考虑替换alpine源
+
+```
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+```
