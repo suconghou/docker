@@ -2,8 +2,6 @@
 
 http://bftpd.sourceforge.net/
 
-version 4.9
-
 
 run without config file (use default settings) `bftpd -n -D`, default port is 21
 
