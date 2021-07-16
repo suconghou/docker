@@ -1,5 +1,5 @@
 FROM alpine AS build
-RUN apk add --update gcc g++ make cmake wget file xz bison autoconf pcre-dev zlib-dev zlib-static libjpeg-turbo-dev libjpeg-turbo-static libpng-static libpng-dev bzip2-dev bzip2-static openssl-dev openssl-libs-static sqlite-dev sqlite-static oniguruma-dev libsodium-dev libsodium-static c-ares-dev
+RUN apk add --update gcc g++ make cmake wget file xz bison autoconf pcre-dev zlib-dev zlib-static libjpeg-turbo-dev libjpeg-turbo-static libpng-static libpng-dev bzip2-dev bzip2-static openssl-dev openssl-libs-static sqlite-dev sqlite-static oniguruma-dev libsodium-dev libsodium-static
 RUN LIBXML2_VERSION=libxml2-2.9.12 && wget http://xmlsoft.org/sources/${LIBXML2_VERSION}.tar.gz && tar zxf ${LIBXML2_VERSION}.tar.gz && cd ${LIBXML2_VERSION} && ./configure && make -j4 && make install
 RUN LIBXSLT_VERSION=libxslt-1.1.34 && wget http://xmlsoft.org/sources/${LIBXSLT_VERSION}.tar.gz && tar zxf ${LIBXSLT_VERSION}.tar.gz && cd ${LIBXSLT_VERSION} && ./configure && make -j4 && make install
 RUN CURL_VERSION=curl-7.77.0 && wget --no-check-certificate https://curl.haxx.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure --with-openssl --enable-ares && make -j4 && make install
@@ -17,7 +17,7 @@ RUN cd php-7.*.* && rm -rf configure && ./buildconf --force && \
 export CFLAGS="-Os" && LDFLAGS="-static" LIBS="$(curl-config --static-libs)" && \
 export LIBZIP_LIBS="-L/usr/local/lib64 -lzip" && \
 export LIBZIP_CFLAGS=-I/usr/local/include && \
-./configure --enable-inline-optimization --enable-static=yes --enable-shared=no --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --disable-opcache --disable-fpm --disable-phpdbg --enable-igbinary --with-msgpack --enable-redis --enable-redis-igbinary --enable-apcu --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath --with-zip --with-zlib --enable-mbstring --with-imagick --enable-gd --with-freetype --with-jpeg --with-mysqli --with-pdo-mysql --enable-mysqlnd --with-openssl --enable-openssl --with-openssl-dir=/usr/ --enable-exif --enable-calendar --with-bz2 --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-shmop --with-xsl --with-sodium --with-curl=/usr/local/ --enable-cares && \
+./configure --enable-inline-optimization --enable-static=yes --enable-shared=no --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --disable-opcache --disable-fpm --disable-phpdbg --enable-igbinary --with-msgpack --enable-redis --enable-redis-igbinary --enable-apcu --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath --with-zip --with-zlib --enable-mbstring --with-imagick --enable-gd --with-freetype --with-jpeg --with-mysqli --with-pdo-mysql --enable-mysqlnd --with-openssl --enable-openssl --with-openssl-dir=/usr/ --enable-exif --enable-calendar --with-bz2 --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-shmop --with-xsl --with-sodium --with-curl=/usr/local/ && \
 sed -i "s{-export-dynamic{-all-static{" Makefile && make -j4 && make install
 RUN cd php-7.*.* && \
 strip -s /usr/local/bin/php && mv php.ini-production /etc/php.ini && \
