@@ -2,7 +2,7 @@
 
 based on alpine
 
-version php7.4 & php7.3
+version php8.0 & php7.4
 
 ## Usage
 
@@ -10,7 +10,7 @@ version php7.4 & php7.3
 docker run --rm -it suconghou/php sh
 ```
 
-版本:两个主要版本 7.4 和 7.3
+版本:两个主要版本 8.0 和 7.4
 
 关于标签
 
@@ -48,6 +48,8 @@ redis 扩展启用 igbinary 支持,静态编译
 
 
 ## 7.3
+
+> 7.3 已不再持续更新
 
 **官方静态编译**
 
