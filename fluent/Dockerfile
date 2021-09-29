@@ -2,7 +2,7 @@ FROM centos:7
 RUN yum install -y gcc make wget tar gcc-c++ flex bison
 RUN yum install -y https://download-ib01.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y cmake3
-RUN wget -O- https://github.com/fluent/fluent-bit/archive/refs/tags/v1.8.2.tar.gz | tar xz --strip 1
+RUN wget -O- https://github.com/fluent/fluent-bit/archive/refs/tags/v1.8.7.tar.gz | tar xz --strip 1
 RUN cd build && \
 cmake3 -DFLB_RELEASE=On \
 -DFLB_JEMALLOC=On \
