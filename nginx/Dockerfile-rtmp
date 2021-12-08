@@ -1,4 +1,5 @@
 FROM alpine AS build
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk --update add gcc g++ make wget file openssl-dev openssl-libs-static pcre-dev zlib-dev zlib-static linux-headers
 RUN NGINX_VERSION=nginx-1.21.4 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && \
     wget -O- https://github.com/arut/nginx-rtmp-module/archive/refs/tags/v1.2.2.tar.gz | tar xz && \
