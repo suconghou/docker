@@ -1,5 +1,5 @@
 FROM alpine AS build
-RUN apk update && apk upgrade && apk add gcc g++ wget
+RUN apk add --update gcc g++ wget
 RUN wget --no-check-certificate https://unix4lyfe.org/darkhttpd/darkhttpd-1.12.tar.bz2 && tar jxf darkhttpd-1.12.tar.bz2 && cd darkhttpd-1.12 && \
 gcc -Os -static -o /darkhttpd darkhttpd.c && strip -s /darkhttpd
 

@@ -1,5 +1,5 @@
 FROM alpine AS build
-RUN apk update && apk upgrade && apk add wget gcc g++ make file
+RUN apk add --update wget gcc g++ make file
 RUN wget -O- https://github.com/maxmind/geoip-api-c/releases/download/v1.6.32/GeoIP-1.6.32.tar.gz | tar xz && \
     cd GeoIP-1.6.32 && ./configure && make && make install
 RUN wget -O- http://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz | tar xz && \

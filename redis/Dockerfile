@@ -1,5 +1,5 @@
 FROM alpine AS build
-RUN apk update && apk upgrade && apk add gcc g++ make wget linux-headers
+RUN apk add --update gcc g++ make wget linux-headers
 RUN REDIS_VERSION=redis-6.2.6 && wget http://download.redis.io/releases/${REDIS_VERSION}.tar.gz && tar xzf ${REDIS_VERSION}.tar.gz && cd ${REDIS_VERSION} && \
     make LDFLAGS=-static -j2 && make install && strip -s /usr/local/bin/* && mv redis.conf /etc/redis.conf
 
