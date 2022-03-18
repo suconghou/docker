@@ -1,0 +1,1 @@
+build ffmpeg static libs for development
