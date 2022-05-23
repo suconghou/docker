@@ -10,16 +10,16 @@ version php8.0 & php7.4
 docker run --rm -it suconghou/php sh
 ```
 
-版本:两个主要版本 8.0 和 7.4
+版本:两个主要版本 8.1 和 8.0
 
 关于标签
 
 
-## 7.4
+## 8.1
 
 **官方静态编译**
 
-`latest` `7.4.x` `7.4` 为7.4最新版,包含 cli,fpm,包含官方大部分扩展,静态编译
+`latest` `8.1.x` 为8.1最新版,包含 cli,fpm,包含官方大部分扩展,静态编译
 
 `cli` 从`latest`版本挑出 cli 部分.
 
@@ -39,6 +39,9 @@ docker run --rm -it suconghou/php sh
 redis 扩展启用 igbinary 支持,静态编译
 
 并且修改了 php.ini 的 session serialize_handler `session.serialize_handler=igbinary`
+
+
+`mongo` 标签与`redis`类似，在`redis`的基础上包含了mongodb
 
 `swoole` `swoole_4.x.x` 此标签与`redis`类似,不同的是在其基础上包含了
 
