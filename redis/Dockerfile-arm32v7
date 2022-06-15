@@ -1,6 +1,6 @@
 FROM arm32v7/alpine AS build
 RUN apk add --update gcc g++ make wget linux-headers
-RUN REDIS_VERSION=redis-6.2.6 && wget http://download.redis.io/releases/${REDIS_VERSION}.tar.gz && tar xzf ${REDIS_VERSION}.tar.gz && cd ${REDIS_VERSION} && \
+RUN REDIS_VERSION=redis-7.0.2 && wget http://download.redis.io/releases/${REDIS_VERSION}.tar.gz && tar xzf ${REDIS_VERSION}.tar.gz && cd ${REDIS_VERSION} && \
 make LDFLAGS=-static -j2 && make install && strip -s /usr/local/bin/* && mv redis.conf /etc/redis.conf
 
 FROM arm32v7/alpine
