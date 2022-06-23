@@ -1,7 +1,7 @@
 FROM alpine AS build
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk --update add gcc g++ make wget file openssl-dev openssl-libs-static pcre-dev zlib-dev zlib-static linux-headers
-RUN NGINX_VERSION=nginx-1.21.6 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && \
+RUN NGINX_VERSION=nginx-1.23.0 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && \
     wget -O- https://github.com/arut/nginx-rtmp-module/archive/refs/tags/v1.2.2.tar.gz | tar xz && \
     ./configure --with-pcre --with-pcre-jit --with-http_v2_module --with-http_ssl_module --with-file-aio --add-module=nginx-rtmp-module-1.2.2 --with-debug --sbin-path=/usr/local/sbin/nginx --prefix=/etc/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock && \
     sed -i "s/-lpcre -lssl -lcrypto -lz/-static -lpcre -lssl -lcrypto -lz/g" objs/Makefile && make -j2 CFLAGS=-O3 LDFLAGS=-static && make install && \
