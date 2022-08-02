@@ -2,7 +2,7 @@ FROM alpine AS build
 RUN apk add --update gcc g++ make wget git file openssl-dev openssl-libs-static pcre-dev zlib-dev zlib-static
 RUN git clone https://github.com/cuber/ngx_http_google_filter_module
 RUN git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module
-RUN NGINX_VERSION=nginx-1.23.0 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && ls -lha && \
+RUN NGINX_VERSION=nginx-1.23.1 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && ls -lha && \
 ./configure --with-http_v2_module --with-http_ssl_module --with-stream --with-stream_ssl_preread_module --sbin-path=/usr/local/sbin/nginx --prefix=/etc/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock \
 --without-select_module \ 
 --without-poll_module \
