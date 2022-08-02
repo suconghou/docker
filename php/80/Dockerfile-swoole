@@ -12,7 +12,7 @@ RUN MSGPACK_VERSION=msgpack-2.1.2 && cd php-8.*.* && wget https://pecl.php.net/g
 RUN IGBINARY_VERSION=igbinary-3.2.7 && cd php-8.*.* && wget https://pecl.php.net/get/${IGBINARY_VERSION}.tgz && tar zxf ${IGBINARY_VERSION}.tgz && mv ${IGBINARY_VERSION} ext/igbinary
 RUN IMAGICK_VERSION=imagick-3.7.0 && cd php-8.*.* && wget https://pecl.php.net/get/${IMAGICK_VERSION}.tgz && tar zxf ${IMAGICK_VERSION}.tgz && mv ${IMAGICK_VERSION} ext/imagick
 RUN APCU_VERSION=apcu-5.1.21 && cd php-8.*.* && wget https://pecl.php.net/get/${APCU_VERSION}.tgz && tar zxf ${APCU_VERSION}.tgz && mv ${APCU_VERSION} ext/apcu
-RUN SWOOLE_VERSION=swoole-4.8.11 && cd php-8.*.* && wget https://pecl.php.net/get/${SWOOLE_VERSION}.tgz && tar zxf ${SWOOLE_VERSION}.tgz && mv ${SWOOLE_VERSION} ext/swoole
+RUN SWOOLE_VERSION=swoole-5.0.0 && cd php-8.*.* && wget https://pecl.php.net/get/${SWOOLE_VERSION}.tgz && tar zxf ${SWOOLE_VERSION}.tgz && mv ${SWOOLE_VERSION} ext/swoole
 RUN cd php-8.*.* && rm -rf configure && ./buildconf --force && \
 export CFLAGS="-Os" && LDFLAGS="-static" LIBS="$(curl-config --static-libs)" && \
 export LIBZIP_LIBS="-L/usr/local/lib64 -lzip" && \

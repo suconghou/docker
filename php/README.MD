@@ -2,7 +2,7 @@
 
 based on alpine
 
-version php8.0 & php7.4
+version php8.0 & php8.1
 
 ## Usage
 
@@ -50,9 +50,9 @@ redis 扩展启用 igbinary 支持,静态编译
 此标签内不包含fpm
 
 
-## 7.3
+## 7.3 / 7.4
 
-> 7.3 已不再持续更新
+> 7.3 / 7.4 已不再持续更新
 
 **官方静态编译**
 
