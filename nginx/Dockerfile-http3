@@ -5,7 +5,7 @@ RUN NGINX_VERSION=nginx-1.23.1 && wget http://nginx.org/download/${NGINX_VERSION
     git clone --depth=1 --recursive --shallow-submodules https://github.com/openresty/headers-more-nginx-module && \
     NJS_TAG=0.7.6 && git clone --branch $NJS_TAG --depth=1 --recursive --shallow-submodules https://github.com/nginx/njs && \
     QUICHE_CHECKOUT=b841ca548a3b9fcb14c1ae16aa8b22b683a3646d && \
-    git clone --recursive https://github.com/cloudflare/quiche && cd quiche && git checkout --recurse-submodules $QUICHE_CHECKOUT && cd .. \
+    git clone --recursive https://github.com/cloudflare/quiche && cd quiche && git checkout --recurse-submodules $QUICHE_CHECKOUT && cd .. && \
     wget -O nginx_with_quic.patch https://raw.githubusercontent.com/kn007/patch/1062e64ead7e1b21a52392cdd02d1d5bc631d231/nginx_with_quic.patch && \
     wget -O Enable_BoringSSL_OCSP.patch https://raw.githubusercontent.com/kn007/patch/cd03b77647c9bf7179acac0125151a0fbb4ac7c8/Enable_BoringSSL_OCSP.patch && \
     patch -p01 < nginx_with_quic.patch && \
