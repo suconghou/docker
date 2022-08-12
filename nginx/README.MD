@@ -35,3 +35,12 @@ for nginx:busybox can be run use `nginx -g "user root root;"`
 
 因为 busybox 里面没有`nobody`组，执行`addgroup nobody`添加组后也可以直接运行。
 
+## http3
+
+参考
+
+https://github.com/patrikjuvonen/docker-nginx-http3
+
+去除部分扩展
+改为静态编译
+

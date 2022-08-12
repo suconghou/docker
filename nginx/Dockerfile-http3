@@ -1,0 +1,43 @@
+FROM alpine:edge AS build
+RUN apk --update add gcc g++ make cmake wget file git cargo rust patch pcre-dev zlib-dev zlib-static linux-headers
+RUN NGINX_VERSION=nginx-1.23.1 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && \
+    git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli && \
+    git clone --depth=1 --recursive --shallow-submodules https://github.com/openresty/headers-more-nginx-module && \
+    NJS_TAG=0.7.6 && git clone --branch $NJS_TAG --depth=1 --recursive --shallow-submodules https://github.com/nginx/njs && \
+    QUICHE_CHECKOUT=b841ca548a3b9fcb14c1ae16aa8b22b683a3646d && \
+    git clone --recursive https://github.com/cloudflare/quiche && cd quiche && git checkout --recurse-submodules $QUICHE_CHECKOUT && cd .. \
+    wget -O nginx_with_quic.patch https://raw.githubusercontent.com/kn007/patch/1062e64ead7e1b21a52392cdd02d1d5bc631d231/nginx_with_quic.patch && \
+    wget -O Enable_BoringSSL_OCSP.patch https://raw.githubusercontent.com/kn007/patch/cd03b77647c9bf7179acac0125151a0fbb4ac7c8/Enable_BoringSSL_OCSP.patch && \
+    patch -p01 < nginx_with_quic.patch && \
+    patch -p01 < Enable_BoringSSL_OCSP.patch && \
+    mkdir -p /root/.cargo && \
+    echo $'[net]\ngit-fetch-with-cli = true' > /root/.cargo/config.toml && \
+    ./configure --with-pcre --with-pcre-jit \
+    --with-http_v2_module --with-http_v2_hpack_enc --with-http_v3_module \
+    --with-http_ssl_module --with-http_slice_module \
+    --with-http_flv_module --with-http_mp4_module \
+    --with-stream --with-stream_ssl_module --with-stream_ssl_preread_module \
+    --with-file-aio --with-openssl=quiche/quiche/deps/boringssl \
+    --with-quiche=quiche \
+    --add-module=ngx_brotli \
+    --add-module=headers-more-nginx-module \
+    --add-module=njs/nginx \
+    --sbin-path=/usr/local/sbin/nginx \
+    --prefix=/etc/nginx \
+    --conf-path=/etc/nginx/nginx.conf \
+    --http-log-path=/var/log/nginx/access.log \
+    --error-log-path=/var/log/nginx/error.log \
+    --pid-path=/var/run/nginx.pid \
+    --lock-path=/var/run/nginx.lock && \
+    sed -i "s/-lpcre quiche\/quiche\/deps\/boringssl\/.openssl\/lib\/libssl.a quiche\/quiche\/deps\/boringssl\/.openssl\/lib\/libcrypto.a quiche\/target\/release\/libquiche.a -lm -lz/-static -lpcre quiche\/quiche\/deps\/boringssl\/.openssl\/lib\/libssl.a quiche\/quiche\/deps\/boringssl\/.openssl\/lib\/libcrypto.a quiche\/target\/release\/libquiche.a -lm -lz/g" objs/Makefile && \
+    make -j2 CFLAGS=-O3 LDFLAGS=-static && make install && \
+    strip -s /usr/local/sbin/nginx &&  rm -rf /etc/nginx/*.default
+
+FROM alpine
+LABEL maintainer="suconghou@gmail.com"
+COPY --from=build /usr/local/sbin/nginx /usr/local/sbin/nginx
+COPY --from=build /etc/nginx /etc/nginx
+COPY --from=build /var/log/nginx /var/log/nginx
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
+WORKDIR /etc/nginx
+EXPOSE 80 443
