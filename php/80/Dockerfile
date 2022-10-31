@@ -2,10 +2,10 @@ FROM alpine AS build
 RUN apk add --update gcc g++ make cmake wget file xz bison autoconf pcre-dev zlib-dev zlib-static libjpeg-turbo-dev libjpeg-turbo-static libpng-static libpng-dev bzip2-dev bzip2-static openssl-dev openssl-libs-static sqlite-dev sqlite-static oniguruma-dev libsodium-dev libsodium-static c-ares-dev c-ares-static linux-headers
 RUN LIBXML2_VERSION=libxml2-2.9.12 && wget http://xmlsoft.org/sources/${LIBXML2_VERSION}.tar.gz && tar zxf ${LIBXML2_VERSION}.tar.gz && cd ${LIBXML2_VERSION} && ./configure && make -j$(nproc) && make install
 RUN LIBXSLT_VERSION=libxslt-1.1.34 && wget http://xmlsoft.org/sources/${LIBXSLT_VERSION}.tar.gz && tar zxf ${LIBXSLT_VERSION}.tar.gz && cd ${LIBXSLT_VERSION} && ./configure && make -j$(nproc) && make install
-RUN CURL_VERSION=curl-7.85.0 && wget --no-check-certificate https://curl.haxx.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure --with-openssl --enable-ares && make -j$(nproc) && make install
+RUN CURL_VERSION=curl-7.86.0 && wget --no-check-certificate https://curl.haxx.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure --with-openssl --enable-ares && make -j$(nproc) && make install
 RUN LIBFREETYPE_VERSION=freetype-2.12.1 && wget --no-check-certificate https://download-mirror.savannah.gnu.org/releases/freetype/${LIBFREETYPE_VERSION}.tar.gz && tar zxf ${LIBFREETYPE_VERSION}.tar.gz && cd ${LIBFREETYPE_VERSION} && ./configure && make -j$(nproc) && make install && ln -s $(pwd)/builds/unix/freetype-config /usr/local/bin/freetype-config
 RUN LIBZIP_VERSION=libzip-1.9.2 && wget --no-check-certificate https://libzip.org/download/${LIBZIP_VERSION}.tar.xz && tar Jxf ${LIBZIP_VERSION}.tar.xz && cd ${LIBZIP_VERSION} && mkdir build && cd build && cmake .. -DBUILD_SHARED_LIBS=OFF && make -j$(nproc) && make install
-RUN PHP_VERSION=php-8.0.24 && wget https://www.php.net/distributions/${PHP_VERSION}.tar.xz && tar xJf ${PHP_VERSION}.tar.xz && cd ${PHP_VERSION} && \
+RUN PHP_VERSION=php-8.0.25 && wget https://www.php.net/distributions/${PHP_VERSION}.tar.xz && tar xJf ${PHP_VERSION}.tar.xz && cd ${PHP_VERSION} && \
     export CFLAGS="-Os" && LDFLAGS="-static" LIBS="$(curl-config --static-libs)" && \
     export LIBZIP_LIBS="-L/usr/local/lib64 -lzip" && \
     export LIBZIP_CFLAGS=-I/usr/local/include && \
