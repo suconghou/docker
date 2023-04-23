@@ -1,4 +1,6 @@
 
+Python2.7.5是CentOS 7默认安装的版本;
+Python3.6.8是CentOS 7中可以通过默认repo安装到的最新版本；
 
 
 ## pillow-simd
