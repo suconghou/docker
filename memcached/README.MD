@@ -6,7 +6,7 @@ memcached all version can be found here http://www.memcached.org/files/
 
 static build memcached
 
-memcached version v1.6.18
+memcached version v1.6.21
 
 ```
 docker run --rm -it suconghou/memcached memcached -h

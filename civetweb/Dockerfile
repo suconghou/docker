@@ -1,7 +1,7 @@
 FROM alpine AS build
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk add --update gcc g++ make
-RUN wget -O- https://github.com/civetweb/civetweb/archive/v1.15.tar.gz | tar xz && \
+RUN wget -O- https://github.com/civetweb/civetweb/archive/v1.16.tar.gz | tar xz && \
     cd civetweb-* && make -j4 COPT="-Os -ffunction-sections -fdata-sections" LDFLAGS="-static" WITH_LUA=1 WITH_WEBSOCKET=1 WITH_SERVER_STATS=1 WITH_DUKTAPE_VERSION=108 WITH_IPV6=1 && \
     strip -s civetweb && mv civetweb /
 
