@@ -1,6 +1,6 @@
 FROM alpine AS build
 RUN apk add --update gcc g++ make zlib-dev zlib-static openssl-dev openssl-libs-static
-RUN OPENSSH_VERSION=openssh-8.9p1 && wget http://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/${OPENSSH_VERSION}.tar.gz && tar xzf ${OPENSSH_VERSION}.tar.gz && cd ${OPENSSH_VERSION} && ls -lha && \
+RUN OPENSSH_VERSION=openssh-9.4p1 && wget http://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/${OPENSSH_VERSION}.tar.gz && tar xzf ${OPENSSH_VERSION}.tar.gz && cd ${OPENSSH_VERSION} && ls -lha && \
     ./configure && make -j2 CFLAGS=-Os LDFLAGS="-static -L./ -L./openbsd-compat/" && make install
 RUN strip -s /usr/local/bin/ssh /usr/local/bin/scp /usr/local/bin/sftp /usr/local/bin/ssh-keygen /usr/local/sbin/sshd
 

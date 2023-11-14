@@ -1,5 +1,5 @@
 FROM suconghou/redis AS build
-RUN /usr/local/bin/redis-server -v && ldd /usr/local/bin/redis-server
+RUN /usr/local/bin/redis-server -v
 
 FROM busybox
 LABEL maintainer="suconghou@gmail.com"
