@@ -1,8 +1,6 @@
 ## PHP
 
-based on alpine
-
-version php8.0 & php8.1
+static build php based on alpine
 
 ## Usage
 
@@ -10,12 +8,16 @@ version php8.0 & php8.1
 docker run --rm -it suconghou/php sh
 ```
 
-版本:两个主要版本 8.1 和 8.0
 
-关于标签
+## docker image
 
+https://hub.docker.com/r/suconghou/php/
 
-## 8.1
+## dockerfile
+
+https://github.com/suconghou/docker/tree/master/php
+
+## 8.0 & 8.1 & 8.2 & 8.3
 
 **官方静态编译**
 
@@ -118,14 +120,6 @@ redis 扩展启用 igbinary 支持,静态编译
 与 7.2 不同的是,含有`mcrypt`扩展,此扩展在 7.2 中已废除,7.2 推荐使用`openssl`扩展
 
 7.1已不再维护
-
-## docker image
-
-https://hub.docker.com/r/suconghou/php/
-
-## dockerfile
-
-https://github.com/suconghou/docker/tree/master/php
 
 
 
