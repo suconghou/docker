@@ -1,6 +1,6 @@
 FROM alpine:edge AS build
 RUN apk --update add gcc g++ make cmake wget file git cargo rust patch pcre-dev zlib-dev zlib-static linux-headers
-RUN NGINX_VERSION=nginx-1.25.1 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && \
+RUN NGINX_VERSION=nginx-1.25.3 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && \
     git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli && \
     git clone --depth=1 --recursive --shallow-submodules https://github.com/openresty/headers-more-nginx-module && \
     NJS_TAG=0.8.1 && git clone --branch $NJS_TAG --depth=1 --recursive --shallow-submodules https://github.com/nginx/njs && \
