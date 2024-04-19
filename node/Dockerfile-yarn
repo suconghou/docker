@@ -1,6 +1,6 @@
 FROM suconghou/node
 LABEL maintainer="suconghou@gmail.com"
-RUN YARN_VERSION=1.22.19 && mkdir -p /opt/yarn/ \
+RUN YARN_VERSION=1.22.22 && mkdir -p /opt/yarn/ \
 && wget -O- --no-check-certificate https://mirrors.huaweicloud.com/yarn/v$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz | tar xz --strip 1 -C /opt/yarn \
 && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn \
 && ln -s /opt/yarn/bin/yarnpkg /usr/local/bin/yarnpkg && yarn config set registry https://registry.npmmirror.com
