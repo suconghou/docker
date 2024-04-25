@@ -1,0 +1,4 @@
+FROM suconghou/node:yarn
+RUN yarn global add pnpm \
+&& echo 'registry=https://registry.npmmirror.com' > .npmrc \
+&& pnpm config list && pnpm -v
