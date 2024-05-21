@@ -1,5 +1,5 @@
 FROM python:3.12-alpine
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk add --no-cache gcc g++ make zlib-dev libjpeg-turbo-dev libwebp-dev freetype-dev
-RUN CC="cc -mavx2" pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple pillow-simd qrcode
+RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple pillow-simd qrcode
 
