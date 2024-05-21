@@ -45,7 +45,7 @@ redis 扩展启用 igbinary 支持,静态编译
 
 `mongo` 标签与`redis`类似，在`redis`的基础上包含了mongodb
 
-`swoole` `swoole_4.x.x` 此标签与`redis`类似,不同的是在其基础上包含了
+`swoole` `swoole_5.x.x` 此标签与`mongo`类似,不同的是在其基础上包含了
 
 - swoole
 
