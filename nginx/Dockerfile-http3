@@ -3,7 +3,7 @@ RUN apk --update add gcc g++ make cmake wget file git cargo rust patch pcre-dev 
 RUN NGINX_VERSION=nginx-1.25.3 && wget http://nginx.org/download/${NGINX_VERSION}.tar.gz && tar zxf ${NGINX_VERSION}.tar.gz && cd ${NGINX_VERSION} && \
     git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli && \
     git clone --depth=1 --recursive --shallow-submodules https://github.com/openresty/headers-more-nginx-module && \
-    NJS_TAG=0.8.1 && git clone --branch $NJS_TAG --depth=1 --recursive --shallow-submodules https://github.com/nginx/njs && \
+    NJS_TAG=0.8.5 && git clone --branch $NJS_TAG --depth=1 --recursive --shallow-submodules https://github.com/nginx/njs && \
     QUICHE_CHECKOUT=83d9168ab6f76302ae846cb068cc8991f2b06479 && \
     git clone --recursive https://github.com/cloudflare/quiche && cd quiche && git checkout --recurse-submodules $QUICHE_CHECKOUT && cd .. && \
     wget -O nginx_with_quic.patch https://raw.githubusercontent.com/kn007/patch/1062e64ead7e1b21a52392cdd02d1d5bc631d231/nginx_with_quic.patch && \
