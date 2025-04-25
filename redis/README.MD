@@ -2,7 +2,7 @@
 
 redis docker image
 
-redis version 7.4.1
+redis version 7.4.2
 
 website http://redis.io/
 

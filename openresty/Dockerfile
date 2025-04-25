@@ -1,7 +1,7 @@
 FROM alpine AS build
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk add --update gcc g++ make wget perl pcre-dev openssl-dev openssl-libs-static zlib-dev zlib-static
-RUN OPENRESTY_VERSION=openresty-1.25.3.1 && wget https://openresty.org/download/${OPENRESTY_VERSION}.tar.gz && tar xzf ${OPENRESTY_VERSION}.tar.gz && cd ${OPENRESTY_VERSION} && \
+RUN OPENRESTY_VERSION=openresty-1.27.1.1 && wget https://openresty.org/download/${OPENRESTY_VERSION}.tar.gz && tar xzf ${OPENRESTY_VERSION}.tar.gz && cd ${OPENRESTY_VERSION} && \
 rm -f /lib/libcrypto.so* /lib/libssl.so* /usr/lib/libpcre.so*  && \
 ./configure --with-pcre --with-pcre-jit --with-http_v2_module --with-http_slice_module --with-http_stub_status_module --with-http_sub_module --with-http_addition_module --with-http_realip_module -j4 && \ 
 make -j4 && make install && strip -s /usr/local/openresty/nginx/sbin/nginx /usr/lib/libgcc_s.so.1 /usr/local/openresty/luajit/lib/libluajit-5.1.so.2.1.0 && \
