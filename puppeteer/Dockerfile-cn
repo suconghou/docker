@@ -1,4 +1,4 @@
-FROM suconghou/puppeteer:202504
+FROM suconghou/puppeteer:202509
 RUN apk add --no-cache nss freetype freetype-dev harfbuzz ca-certificates ttf-freefont
 RUN cd /usr/share/fonts/ && \
 wget https://github.com/gnuletik/puppeteer-heroku-buildpack-fonts/raw/main/fonts/wqy-zenhei.ttc && \
