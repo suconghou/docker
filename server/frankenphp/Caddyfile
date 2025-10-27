@@ -1,10 +1,10 @@
 :8080 {
-    root * /app/www
-    php_server {
-        index index.php
-    }
-    try_files {path} {path}/ /index.php?{query}
-    file_server {
-        hide .*
-    }
+	root * /app/www
+	php_server {
+		index index.php
+	}
+	try_files {path} {path}/ /index.php?{query}
+	file_server {
+		hide .*
+	}
 }
