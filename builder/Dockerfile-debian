@@ -1,0 +1,2 @@
+FROM debian
+RUN apt update && apt install -y wget gcc g++ make cmake pkg-config

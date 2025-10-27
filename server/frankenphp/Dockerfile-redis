@@ -1,0 +1,6 @@
+FROM suconghou/redis AS build
+FROM suconghou/frankenphp
+COPY --from=build /usr/local/bin/redis-server /usr/local/bin/redis-cli /usr/local/bin/
+COPY --from=build /etc/redis.conf /etc/redis.conf
+EXPOSE 8080
+CMD ["sh","-c","redis-server /etc/redis.conf --daemonize yes && frankenphp run -c Caddyfile"]
