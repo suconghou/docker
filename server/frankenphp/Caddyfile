@@ -1,8 +1,17 @@
+{
+	frankenphp {
+		php_ini {
+			expose_php Off
+			session.name sid
+			session.serialize_handler igbinary
+		}
+	}
+}
 :8080 {
 	root * /app/www
-	header -X-Powered-By
 	php_server {
 		index index.php
+		resolve_root_symlink false
 	}
 	try_files {path} {path}/ /index.php?{query}
 	file_server {
