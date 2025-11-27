@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t=suconghou/php:8.1.30 .
+docker build -t=suconghou/php:8.1.33 .
