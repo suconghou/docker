@@ -1,19 +1,19 @@
 FROM alpine AS build
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-RUN apk add --update gcc g++ make cmake wget file xz bison autoconf pcre-dev zlib-dev zlib-static libjpeg-turbo-dev libjpeg-turbo-static libpng-static libpng-dev bzip2-dev bzip2-static openssl-dev openssl-libs-static sqlite-dev sqlite-static oniguruma-dev libsodium-dev libsodium-static c-ares-dev c-ares-static linux-headers
+RUN apk add --update gcc g++ make cmake wget file xz bison autoconf pcre-dev zlib-dev zlib-static libjpeg-turbo-dev libjpeg-turbo-static libpng-static libpng-dev bzip2-dev bzip2-static openssl-dev openssl-libs-static sqlite-dev sqlite-static oniguruma-dev libsodium-dev libsodium-static c-ares-dev linux-headers
 RUN LIBXML2_VERSION=libxml2-2.9.12 && wget http://xmlsoft.org/sources/${LIBXML2_VERSION}.tar.gz && tar zxf ${LIBXML2_VERSION}.tar.gz && cd ${LIBXML2_VERSION} && ./configure && make -j$(nproc) && make install
 RUN LIBXSLT_VERSION=libxslt-1.1.34 && wget http://xmlsoft.org/sources/${LIBXSLT_VERSION}.tar.gz && tar zxf ${LIBXSLT_VERSION}.tar.gz && cd ${LIBXSLT_VERSION} && ./configure && make -j$(nproc) && make install
-RUN CURL_VERSION=curl-8.15.0 && wget --no-check-certificate https://curl.haxx.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure --with-openssl --enable-ares && make -j$(nproc) && make install
-RUN LIBFREETYPE_VERSION=freetype-2.13.3 && wget --no-check-certificate https://download-mirror.savannah.gnu.org/releases/freetype/${LIBFREETYPE_VERSION}.tar.gz && tar zxf ${LIBFREETYPE_VERSION}.tar.gz && cd ${LIBFREETYPE_VERSION} && ./configure && make -j$(nproc) && make install && ln -s $(pwd)/builds/unix/freetype-config /usr/local/bin/freetype-config
-RUN LIBZIP_VERSION=libzip-1.11.2 && wget --no-check-certificate https://libzip.org/download/${LIBZIP_VERSION}.tar.xz && tar Jxf ${LIBZIP_VERSION}.tar.xz && cd ${LIBZIP_VERSION} && mkdir build && cd build && cmake .. -DBUILD_SHARED_LIBS=OFF && make -j$(nproc) && make install
-RUN IMAGEMAGICK_VERSION=7.1.1-41 && wget -O- https://github.com/ImageMagick/ImageMagick/archive/${IMAGEMAGICK_VERSION}.tar.gz | tar xz && cd ImageMagick-${IMAGEMAGICK_VERSION} && ./configure --without-threads --without-fftw --without-perl --disable-opencl --without-modules --without-zip && make -j$(nproc) && make install
-RUN PHP_VERSION=php-8.3.13 && wget https://www.php.net/distributions/${PHP_VERSION}.tar.xz && tar xJf ${PHP_VERSION}.tar.xz && cd ${PHP_VERSION}
-RUN REDIS_VERSION=redis-6.1.0 && cd php-8.*.* && wget https://pecl.php.net/get/${REDIS_VERSION}.tgz && tar zxf ${REDIS_VERSION}.tgz && mv ${REDIS_VERSION} ext/php-redis
+RUN CURL_VERSION=curl-8.17.0 && wget --no-check-certificate https://curl.haxx.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure --without-libpsl --with-openssl --enable-ares && make -j$(nproc) && make install
+RUN LIBFREETYPE_VERSION=freetype-2.14.1 && wget --no-check-certificate https://download-mirror.savannah.gnu.org/releases/freetype/${LIBFREETYPE_VERSION}.tar.gz && tar zxf ${LIBFREETYPE_VERSION}.tar.gz && cd ${LIBFREETYPE_VERSION} && ./configure && make -j$(nproc) && make install && ln -s $(pwd)/builds/unix/freetype-config /usr/local/bin/freetype-config
+RUN LIBZIP_VERSION=libzip-1.11.4 && wget --no-check-certificate https://libzip.org/download/${LIBZIP_VERSION}.tar.xz && tar Jxf ${LIBZIP_VERSION}.tar.xz && cd ${LIBZIP_VERSION} && mkdir build && cd build && cmake .. -DBUILD_SHARED_LIBS=OFF && make -j$(nproc) && make install
+RUN IMAGEMAGICK_VERSION=7.1.2-8 && wget -O- https://github.com/ImageMagick/ImageMagick/archive/${IMAGEMAGICK_VERSION}.tar.gz | tar xz && cd ImageMagick-${IMAGEMAGICK_VERSION} && ./configure --without-threads --without-fftw --without-perl --disable-opencl --without-modules --without-zip && make -j$(nproc) && make install
+RUN PHP_VERSION=php-8.4.15 && wget https://www.php.net/distributions/${PHP_VERSION}.tar.xz && tar xJf ${PHP_VERSION}.tar.xz && cd ${PHP_VERSION}
+RUN REDIS_VERSION=redis-6.3.0 && cd php-8.*.* && wget https://pecl.php.net/get/${REDIS_VERSION}.tgz && tar zxf ${REDIS_VERSION}.tgz && mv ${REDIS_VERSION} ext/php-redis
 RUN MSGPACK_VERSION=msgpack-3.0.0 && cd php-8.*.* && wget https://pecl.php.net/get/${MSGPACK_VERSION}.tgz && tar zxf ${MSGPACK_VERSION}.tgz && mv ${MSGPACK_VERSION} ext/msgpack
 RUN IGBINARY_VERSION=igbinary-3.2.16 && cd php-8.*.* && wget https://pecl.php.net/get/${IGBINARY_VERSION}.tgz && tar zxf ${IGBINARY_VERSION}.tgz && mv ${IGBINARY_VERSION} ext/igbinary
-RUN IMAGICK_VERSION=imagick-3.7.0 && cd php-8.*.* && wget https://pecl.php.net/get/${IMAGICK_VERSION}.tgz && tar zxf ${IMAGICK_VERSION}.tgz && mv ${IMAGICK_VERSION} ext/imagick
-RUN APCU_VERSION=apcu-5.1.24 && cd php-8.*.* && wget https://pecl.php.net/get/${APCU_VERSION}.tgz && tar zxf ${APCU_VERSION}.tgz && mv ${APCU_VERSION} ext/apcu
-RUN MONGODB_VERSION=mongodb-1.20.0 && cd php-8.*.* && wget https://pecl.php.net/get/${MONGODB_VERSION}.tgz && tar zxf ${MONGODB_VERSION}.tgz && mv ${MONGODB_VERSION} ext/mongodb
+RUN IMAGICK_VERSION=imagick-3.8.1 && cd php-8.*.* && wget https://pecl.php.net/get/${IMAGICK_VERSION}.tgz && tar zxf ${IMAGICK_VERSION}.tgz && mv ${IMAGICK_VERSION} ext/imagick
+RUN APCU_VERSION=apcu-5.1.27 && cd php-8.*.* && wget https://pecl.php.net/get/${APCU_VERSION}.tgz && tar zxf ${APCU_VERSION}.tgz && mv ${APCU_VERSION} ext/apcu
+RUN MONGODB_VERSION=mongodb-1.21.2 && cd php-8.*.* && wget https://pecl.php.net/get/${MONGODB_VERSION}.tgz && tar zxf ${MONGODB_VERSION}.tgz && mv ${MONGODB_VERSION} ext/mongodb
 RUN cd php-8.*.* && rm -rf configure && ./buildconf --force && \
 export CFLAGS="-O3" && LDFLAGS="-static" LIBS="$(curl-config --static-libs)" && \
 export LIBZIP_LIBS="-L/usr/local/lib64 -lzip" && \
