@@ -9,6 +9,7 @@
 }
 :8080 {
 	root * /app/www
+	encode zstd br gzip
 	php_server {
 		index index.php
 		resolve_root_symlink false
