@@ -1,5 +1,5 @@
 FROM alpine
-RUN wget -O /usr/local/bin/frankenphp https://github.com/php/frankenphp/releases/download/v1.10.1/frankenphp-linux-x86_64
+RUN wget -O /usr/local/bin/frankenphp https://github.com/php/frankenphp/releases/download/v1.11.0/frankenphp-linux-x86_64
 RUN chmod +x /usr/local/bin/frankenphp
 RUN mkdir -p /app/www
 WORKDIR /app

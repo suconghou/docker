@@ -1,9 +1,14 @@
 {
 	frankenphp {
+		num_threads 10
+		max_threads 30
+		max_wait_time 45s
 		php_ini {
 			expose_php Off
 			session.name sid
 			session.serialize_handler igbinary
+			memory_limit 128M
+			max_execution_time 15
 		}
 	}
 }
