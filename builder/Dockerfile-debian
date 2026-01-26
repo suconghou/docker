@@ -1,2 +1,2 @@
 FROM debian
-RUN apt update && apt install -y wget gcc g++ make cmake pkg-config
+RUN apt update && apt install -y wget gcc g++ make cmake build-essential pkg-config git file libssl-dev unzip

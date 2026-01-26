@@ -2,7 +2,7 @@
 
 static build sniproxy
 
-version 0.6.1
+version 0.7.0
 
 
 ```
@@ -16,6 +16,7 @@ docker run --privileged \
 --name sni \
 --restart always \
 -p 0.0.0.0:443:443 \
+-p 0.0.0.0:80:80 \
 -m 100m \
 suconghou/sniproxy
 ```
