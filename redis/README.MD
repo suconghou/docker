@@ -2,7 +2,7 @@
 
 redis docker image
 
-redis version 8.2.3
+redis version 8.4.2
 
 website http://redis.io/
 

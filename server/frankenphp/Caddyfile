@@ -9,6 +9,9 @@
 			session.serialize_handler igbinary
 			memory_limit 128M
 			max_execution_time 15
+			opcache.enable 1
+			opcache.memory_consumption 32
+			opcache.max_accelerated_files 2000
 		}
 	}
 }
