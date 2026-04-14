@@ -1,0 +1,22 @@
+FROM golang
+RUN sed -i 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g' /etc/apt/sources.list.d/debian.sources
+RUN apt update && apt install -y wget gcc g++ make cmake build-essential pkg-config git file libssl-dev unzip
+COPY --from=suconghou/sshd /usr/local/sbin/sshd /usr/local/sbin/sshd
+RUN mkdir -p /usr/local/etc /var/empty /root/.ssh && \
+    chmod 700 /root/.ssh && \
+    echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDI7qhD/j5I3k+rpW3b7dQAyCnhdrysLYhao4s2dSPIrFkPj6HAHNli149F9cfIRQCXma3YIfpGsvciQuXjUUO8gW2qgJmfwXNt9JB1r0YFTCOKE+inR2Q33Ju+yEU0fP9QIx4+NpHzMUXq7KVAzj76yvCcG7BX2d4bipn6v1FFcTHlaAKj1286OfqdSgdOakyPHNWDlfHUB8r2DmxJWrJxM50cwlvNfdH/VDSbY1+t4QBrN9c4nL78+oIVlyEHqhICr0gkck94yOh7DoE6M+PZgJ425e2tJi/lcOlIZsl96VZ7NL7BaB1J/tLKBPk8SHkZl9vC0oPdioZKNMG7PB3F suconghou@suconghouDeMacBook-Pro.local' > /root/.ssh/authorized_keys && \
+    echo 'PermitRootLogin yes' > /usr/local/etc/sshd_config && \
+    echo 'PasswordAuthentication no' >> /usr/local/etc/sshd_config && \
+    echo 'PubkeyAuthentication yes' >> /usr/local/etc/sshd_config && \
+    echo 'AuthorizedKeysFile /root/.ssh/authorized_keys' >> /usr/local/etc/sshd_config && \
+    echo 'HostKey /usr/local/etc/ssh_host_rsa_key' >> /usr/local/etc/sshd_config && \
+    echo 'HostKey /usr/local/etc/ssh_host_ecdsa_key' >> /usr/local/etc/sshd_config && \
+    echo 'HostKey /usr/local/etc/ssh_host_ed25519_key' >> /usr/local/etc/sshd_config && \
+    chmod 600 /root/.ssh/authorized_keys && \
+    useradd -r -U -d /var/empty -s /usr/sbin/nologin -c "sshd privsep" sshd && \
+    ssh-keygen -t rsa -f /usr/local/etc/ssh_host_rsa_key -N '' && \
+    ssh-keygen -t ecdsa -f /usr/local/etc/ssh_host_ecdsa_key -N '' && \
+    ssh-keygen -t ed25519 -f /usr/local/etc/ssh_host_ed25519_key -N '' && \
+    chmod 644 /root/.ssh/authorized_keys
+CMD ["/usr/local/sbin/sshd","-D"]
+EXPOSE 22
