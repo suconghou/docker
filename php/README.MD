@@ -1,13 +1,15 @@
 ## PHP
 
-static build php based on alpine
+静态编译 php,基于 alpine,只依赖 musl 和内核,镜像内只有 `php` / `php-fpm` 二进制
+
+当前版本 `8.5.12`
 
 ## Usage
 
 ```
-docker run --rm -it suconghou/php sh
+docker run --rm -it suconghou/php php -v
+docker run --rm -it suconghou/php php-fpm -v
 ```
-
 
 ## docker image
 
@@ -17,114 +19,76 @@ https://hub.docker.com/r/suconghou/php/
 
 https://github.com/suconghou/docker/tree/master/php
 
-## 8.0 & 8.1 & 8.2 & 8.3
+## 目录
 
-**官方静态编译**
+| 目录 | php 版本 | 说明 |
+| --- | --- | --- |
+| `php/` | `8.5.12` | 主线,对应 `latest` |
+| `php/84` | `8.4.27` | 8.4 分支,仅安全修复 |
+| `php/83` | `8.3.36` | 8.3 分支,仅安全修复 |
+| `php/82` | `8.2.35` | 8.2 已 EOL,保留最后一个版本 |
 
-`latest` `8.1.x` 为8.1最新版,包含 cli,fpm,包含官方大部分扩展,静态编译
+每个目录下的四个 Dockerfile 各自独立,只差 php 版本号,升级时同步改
 
-`cli` 从`latest`版本挑出 cli 部分.
+## tags
 
-`fpm` 从`latest`版本挑出 fpm 部分.
+`latest` `8.5.12` 基础版,包含 cli + fpm 和官方大部分扩展,静态编译
 
-**包含第三方库的静态编译**
+`redis` `8.5.12_redis` 在基础版上增加第三方扩展
 
-
-`redis` 此标签与`latest`类似,不同的是包含了
-
-- redis
+- redis(启用 igbinary 序列化)
 - igbinary
 - msgpack
 - imagick
 - apcu
 
-redis 扩展启用 igbinary 支持,静态编译
+并把 php.ini 的 `session.serialize_handler` 改为 `igbinary`
 
-并且修改了 php.ini 的 session serialize_handler `session.serialize_handler=igbinary`
+`mongo` `8.5.12_mongo` 在 `redis` 基础上增加
 
+- mongodb
 
-`mongo` 标签与`redis`类似，在`redis`的基础上包含了mongodb
-
-`swoole` `swoole_5.x.x` 此标签与`mongo`类似,不同的是在其基础上包含了
-
-- swoole
-
-此标签内不包含fpm
-
-
-## 7.3 / 7.4
-
-> 7.3 / 7.4 已不再持续更新
-
-**官方静态编译**
-
-`7.3.x` `7.3` 为7.3最新版,包含 cli,fpm,包含官方大部分扩展,静态编译
-
-**包含第三方库的静态编译**
-
-
-`73_redis` 此标签与`latest`类似,不同的是包含了
-
-- redis
-- igbinary
-- msgpack
-- imagick
-- apcu
-
-redis 扩展启用 igbinary 支持,静态编译
-
-并且修改了 php.ini 的 session serialize_handler `session.serialize_handler=igbinary`
-
-`73_swoole` `73_swoole_4.x.x` 此标签与`73_redis`类似,不同的是在其基础上包含了
+`swoole` `8.5.12_swoole_6.2.3` 在 `mongo` 基础上增加
 
 - swoole
 
-此标签内不包含fpm
+此标签**不含** fpm,只有 cli
 
+## 版本
 
+| 组件 | 版本 |
+| --- | --- |
+| php | 8.5.12 |
+| libxml2 | 2.15.4 |
+| libxslt | 1.1.45 |
+| curl | 8.23.0 |
+| freetype | 2.15.0 |
+| libzip | 1.12.1 |
+| ImageMagick | 7.1.2-34 |
+| redis | 6.3.0 |
+| msgpack | 3.0.1 |
+| igbinary | 3.2.17RC1 |
+| imagick | 3.8.1 |
+| apcu | 5.1.28 |
+| mongodb | 2.5.5 |
+| swoole | 6.2.3 |
 
-## 7.2
+## 构建
 
-7.2 已不再持续更新
+```
+cd php && ./make.sh          # 基础版
+cd php && ./make-redis.sh    # redis 版
+cd php && ./make-mongo.sh    # mongo 版
+cd php && ./make-swoole.sh   # swoole 版
+```
 
-**官方静态编译**
-
-`7.2.x` `7.2` 为 7.2 最新版,包含 cli,fpm,包含官方大部分扩展,静态编译
-
-**包含第三方库的静态编译**
-
-`72_redis` 此标签与`7.2`类似,不同的是包含了
-
-- redis
-- igbinary
-- msgpack
-- imagick
-
-redis 扩展启用 igbinary 支持,静态编译
-
-并且修改了 php.ini 的 session serialize_handler `session.serialize_handler=igbinary`
-
-`72_swoole` `72_swoole_4.x.x` 此标签与`72_redis`类似,不同的是在其基础上包含了
-
-- swoole
-
-此标签内不包含fpm
-
-
-## 7.1
-
-`--with-mcrypt, --enable-gd-native-ttf` 这两个参数php7.2已经被废弃
-
-`7.1.x` 7.1 最新版,与 7.2`latest`版类似,包含 cli,fpm,包含官网大部分扩展,静态编译.
-
-与 7.2 不同的是,含有`mcrypt`扩展,此扩展在 7.2 中已废除,7.2 推荐使用`openssl`扩展
-
-7.1已不再维护
-
-
-
-国内构建 可考虑替换alpine源
+国内构建可替换 alpine 源,已默认写入各 Dockerfile
 
 ```
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 ```
+
+libxslt 1.1.45 起 configure 强制要求 python3,构建阶段已安装
+
+igbinary 稳定版 `3.2.16` 不支持 php 8.5(编译失败),`3.2.17RC1` 才加入 8.5 支持,
+所以 8.5 用 RC 版,84/83/82 目录仍用 `3.2.16`。等 3.2.17 正式版发布后统一替换

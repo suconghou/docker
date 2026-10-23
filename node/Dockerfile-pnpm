@@ -1,4 +1,5 @@
 FROM suconghou/node:yarn
-RUN yarn global add pnpm \
-&& echo 'registry=https://registry.npmmirror.com' > .npmrc \
+LABEL maintainer="suconghou@gmail.com"
+RUN PNPM_VERSION=12.15.0 && yarn global add pnpm@${PNPM_VERSION} \
+&& pnpm config set registry https://registry.npmmirror.com \
 && pnpm config list && pnpm -v

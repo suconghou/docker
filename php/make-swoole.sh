@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t=suconghou/php:swoole -t=suconghou/php:8.4.15_swoole_6.1.7 . -f Dockerfile-swoole
+docker build -t=suconghou/php:swoole -t=suconghou/php:8.5.12_swoole_6.2.3 . -f Dockerfile-swoole
