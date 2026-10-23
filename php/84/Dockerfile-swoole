@@ -23,7 +23,7 @@ export LIBZIP_CFLAGS=-I/usr/local/include && \
 sed -i "s{-export-dynamic{-all-static{" Makefile && make -j$(nproc) && make install
 RUN cd php-8.*.* && \
 strip -s /usr/local/bin/php && mv php.ini-production /etc/php.ini && \
-sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini && sed -i '/^session.serialize_handler.*/csession.serialize_handler = igbinary' /etc/php.ini
+sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini && sed -i '/^;\?session\.upload_progress\.enabled.*/csession.upload_progress.enabled = Off' /etc/php.ini && sed -i '/^session.serialize_handler.*/csession.serialize_handler = igbinary' /etc/php.ini
 
 FROM alpine
 LABEL maintainer="suconghou@gmail.com"
