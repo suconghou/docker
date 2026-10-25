@@ -10,7 +10,7 @@ RUN PHP_VERSION=php-8.5.12 && wget https://www.php.net/distributions/${PHP_VERSI
     export CFLAGS="-O3" && LDFLAGS="-static" LIBS="$(curl-config --static-libs)" && \
     export LIBZIP_LIBS="-L/usr/local/lib64 -lzip" && \
     export LIBZIP_CFLAGS=-I/usr/local/include && \
-    ./configure --enable-inline-optimization --enable-static=yes --enable-shared=no --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --enable-opcache --disable-opcache-jit --enable-fpm --disable-phpdbg --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath --with-zip --with-zlib --enable-mbstring --enable-gd --with-freetype --with-jpeg --with-mysqli --with-pdo-mysql --with-openssl --enable-exif --enable-calendar --with-bz2 --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-shmop --with-xsl --with-sodium --with-curl=/usr/local/ && \
+    ./configure --enable-inline-optimization --enable-static=yes --enable-shared=no --prefix=/usr/local --with-config-file-path=/etc --without-pear --disable-cgi --enable-opcache --enable-opcache-jit --enable-fpm --disable-phpdbg --enable-pcntl --enable-sockets --enable-ftp --enable-bcmath --with-zip --with-zlib --enable-mbstring --enable-gd --with-freetype --with-jpeg --with-mysqli --with-pdo-mysql --with-openssl --enable-exif --enable-calendar --with-bz2 --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-shmop --with-xsl --with-sodium --with-curl=/usr/local/ && \
     sed -i "s{-export-dynamic{-all-static{" Makefile && make -j$(nproc) && make install
 RUN cd php-8.*.* && mv /usr/local/etc/php-fpm.conf.default /usr/local/etc/php-fpm.conf && mv /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/www.conf && mkdir -p /var/log/php-fpm && \
     sed -i '/^;error_log.*/cerror_log = \/var\/log\/php-fpm\/php-fpm.log' /usr/local/etc/php-fpm.conf && \
@@ -20,7 +20,7 @@ RUN cd php-8.*.* && mv /usr/local/etc/php-fpm.conf.default /usr/local/etc/php-fp
     sed -i '/^;request_terminate_timeout =.*/crequest_terminate_timeout = 60' /usr/local/etc/php-fpm.d/www.conf && \
     php-fpm -t && strip -s /usr/local/sbin/php-fpm && strip -s /usr/local/bin/php && mv php.ini-development /etc/ && mv php.ini-production /etc/php.ini && \
     sed -i '/^expose_php.*/cexpose_php = Off' /etc/php.ini && \
-    sed -i '/^;\?session\.upload_progress\.enabled.*/csession.upload_progress.enabled = Off' /etc/php.ini
+    sed -i '/^;\?session\.upload_progress\.enabled.*/csession.upload_progress.enabled = Off' /etc/php.ini && printf '\nopcache.jit=tracing\nopcache.jit_buffer_size=64M\n' >> /etc/php.ini
 
 FROM alpine
 LABEL maintainer="suconghou@gmail.com"

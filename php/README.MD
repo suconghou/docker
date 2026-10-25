@@ -44,6 +44,16 @@ https://github.com/suconghou/docker/tree/master/php
 
 并把 php.ini 的 `session.serialize_handler` 改为 `igbinary`
 
+## opcache / JIT
+
+8.5 系列编译时加了 `--enable-opcache-jit`,opcache 和 JIT 都静态编进二进制,
+php.ini 里默认 `opcache.jit=tracing` / `opcache.jit_buffer_size=64M`
+
+8.2/8.3/8.4 没有 opcache:PHP 8.5 之前 `ext/opcache/config.m4` 里硬编码
+`ext_shared=yes`,opcache 只能编成 `opcache.so`;而静态二进制不支持动态加载
+(`Dynamic loading not supported`),所以加载不了。要支持得给 php-src 打补丁
+(改 `ZendAccelerator.c` / `config.m4` / `main.c` 三处),暂未做
+
 `mongo` `8.5.12_mongo` 在 `redis` 基础上增加
 
 - mongodb
