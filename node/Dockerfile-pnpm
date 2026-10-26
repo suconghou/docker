@@ -1,5 +1,6 @@
 FROM suconghou/node:yarn
 LABEL maintainer="suconghou@gmail.com"
 RUN PNPM_VERSION=12.15.0 && yarn global add pnpm@${PNPM_VERSION} \
+&& yarn cache clean \
 && pnpm config set registry https://registry.npmmirror.com \
 && pnpm config list && pnpm -v
