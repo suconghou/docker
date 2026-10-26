@@ -1,6 +1,7 @@
 FROM suconghou/node:yarn
 LABEL maintainer="suconghou@gmail.com"
-RUN PNPM_VERSION=12.15.0 && yarn global add pnpm@${PNPM_VERSION} \
-&& yarn cache clean \
+RUN PNPM_VERSION=12.15.0 && mkdir -p /opt/pnpm \
+&& wget -O- --no-check-certificate https://github.com/pnpm/pnpm/releases/download/v${PNPM_VERSION}/pnpm-linux-x64-musl.tar.gz | tar xz --strip 0 -C /opt/pnpm \
+&& ln -s /opt/pnpm/pnpm /usr/local/bin/pnpm \
 && pnpm config set registry https://registry.npmmirror.com \
 && pnpm config list && pnpm -v
