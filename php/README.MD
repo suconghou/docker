@@ -58,7 +58,7 @@ php.ini 里默认 `opcache.jit=tracing` / `opcache.jit_buffer_size=64M`
 
 - mongodb
 
-`swoole` `8.5.12_swoole_6.2.3` 在 `mongo` 基础上增加
+`swoole` `8.5.12_swoole_6.2.4` 在 `mongo` 基础上增加
 
 - swoole
 
@@ -81,7 +81,7 @@ php.ini 里默认 `opcache.jit=tracing` / `opcache.jit_buffer_size=64M`
 | imagick | 3.8.1 |
 | apcu | 5.1.28 |
 | mongodb | 2.5.5 |
-| swoole | 6.2.3 |
+| swoole | 6.2.4 |
 
 ## 构建
 
@@ -98,7 +98,7 @@ cd php && ./make-swoole.sh   # swoole 版
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 ```
 
-libxslt 1.1.45 起 configure 强制要求 python3,构建阶段已安装
+libxslt 1.1.45 起 configure 仅在启用 python 绑定时才检查 python3,构建用 `--without-python` 跳过
 
 igbinary 稳定版 `3.2.16` 不支持 php 8.5(编译失败),`3.2.17RC1` 才加入 8.5 支持,
 所以 8.5 用 RC 版,84/83/82 目录仍用 `3.2.16`。等 3.2.17 正式版发布后统一替换
