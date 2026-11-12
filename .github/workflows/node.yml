@@ -1,0 +1,110 @@
+name: node
+
+on:
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: '目标,逗号分隔,按 node -> yarn -> pnpm 顺序 (node yarn pnpm)'
+        type: string
+        default: 'node,yarn,pnpm'
+      registries:
+        description: '推送目标'
+        type: choice
+        options: [both, hub, aliyun, none]
+        default: both
+
+permissions:
+  contents: read
+
+concurrency:
+  group: node
+  cancel-in-progress: false
+
+env:
+  IMAGE: suconghou/node
+  ALIYUN: registry.cn-beijing.aliyuncs.com/suconghou/node
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+
+      - name: login docker hub
+        if: inputs.registries == 'both' || inputs.registries == 'hub'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: login aliyun
+        if: inputs.registries == 'both' || inputs.registries == 'aliyun'
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cn-beijing.aliyuncs.com
+          username: ${{ secrets.ALIYUN_USERNAME }}
+          password: ${{ secrets.ALIYUN_PASSWORD }}
+
+      - name: build
+        env:
+          TARGETS: ${{ inputs.targets }}
+          REGISTRIES: ${{ inputs.registries }}
+        run: |
+          set -euo pipefail
+          TARGETS=$(echo "${TARGETS:-node,yarn,pnpm}" | tr ',' ' ')
+          NODEV=$(grep -m1 -oE 'NODE_VERSION=[0-9.]+' node/Dockerfile | cut -d= -f2)
+
+          want() { case " $TARGETS " in *" $1 "*) return 0 ;; *) return 1 ;; esac; }
+
+          publish() {
+            local tag="$1"
+            case "$REGISTRIES" in
+              both)   docker tag "$IMAGE:$tag" "$ALIYUN:$tag"
+                      docker push "$IMAGE:$tag"
+                      docker push "$ALIYUN:$tag" ;;
+              hub)    docker push "$IMAGE:$tag" ;;
+              aliyun) docker tag "$IMAGE:$tag" "$ALIYUN:$tag"
+                      docker push "$ALIYUN:$tag" ;;
+            esac
+          }
+
+          base() {
+            docker image inspect "$IMAGE:$1" >/dev/null 2>&1 && return 0
+            for src in "$ALIYUN" "$IMAGE"; do
+              if docker pull -q "$src:$1" >/dev/null 2>&1; then
+                docker tag "$src:$1" "$IMAGE:$1"
+                return 0
+              fi
+            done
+            echo "::error::无法获取基础镜像 $IMAGE:$1"; return 1
+          }
+
+          if want node; then
+            echo "::group::node $NODEV"
+            docker buildx build -t "$IMAGE:latest" -t "$IMAGE:$NODEV" --load \
+              --cache-from type=gha,scope=node \
+              --cache-to type=gha,mode=max,scope=node \
+              -f node/Dockerfile node
+            echo "::endgroup::"
+            publish latest
+            publish "$NODEV"
+            echo "- \`node\` => latest $NODEV" >> "$GITHUB_STEP_SUMMARY"
+          elif want yarn || want pnpm; then
+            base latest
+          fi
+
+          if want yarn; then
+            docker buildx build --builder default -t "$IMAGE:yarn" -f node/Dockerfile-yarn node
+            publish yarn
+            echo "- \`yarn\` => yarn" >> "$GITHUB_STEP_SUMMARY"
+          elif want pnpm; then
+            base yarn
+          fi
+
+          if want pnpm; then
+            docker buildx build --builder default -t "$IMAGE:pnpm" -f node/Dockerfile-pnpm node
+            publish pnpm
+            echo "- \`pnpm\` => pnpm" >> "$GITHUB_STEP_SUMMARY"
+          fi

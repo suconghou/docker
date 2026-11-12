@@ -1,0 +1,138 @@
+name: php
+
+on:
+  workflow_dispatch:
+    inputs:
+      versions:
+        description: '版本目录,逗号分隔,留空=全部 (85 84 83 82)'
+        type: string
+        default: '85'
+      variants:
+        description: '变体,逗号分隔,留空=全部 (base redis mongo swoole)'
+        type: string
+        default: ''
+      registries:
+        description: '推送目标'
+        type: choice
+        options: [both, hub, aliyun, none]
+        default: both
+
+permissions:
+  contents: read
+
+concurrency:
+  group: php
+  cancel-in-progress: false
+
+env:
+  IMAGE: suconghou/php
+  ALIYUN: registry.cn-beijing.aliyuncs.com/suconghou/php
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: plan
+        env:
+          VERSIONS: ${{ inputs.versions }}
+          VARIANTS: ${{ inputs.variants }}
+        run: |
+          set -euo pipefail
+          json='['
+          sep=''
+          for v in $(echo "${VERSIONS:-85,84,83,82}" | tr ',' ' '); do
+            case "$v" in
+              85)      dir=php ;;
+              82|83|84) dir=php/$v ;;
+              *) echo "未知版本 $v"; exit 1 ;;
+            esac
+            vs='['
+            for t in $(echo "${VARIANTS:-base,redis,mongo,swoole}" | tr ',' ' '); do
+              case "$t" in
+                base) file=$dir/Dockerfile ;;
+                redis|mongo|swoole) file=$dir/Dockerfile-$t ;;
+                *) echo "未知变体 $t"; exit 1 ;;
+              esac
+              [ -f "$file" ] || { echo "缺少 $file"; exit 1; }
+              vs="$vs\"$t\","
+            done
+            vs="${vs%,}]"
+            json="$json$sep{\"dir\":\"$dir\",\"variants\":$vs}"
+            sep=','
+          done
+          echo "matrix=$json]" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        entry: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+
+      - name: login docker hub
+        if: inputs.registries == 'both' || inputs.registries == 'hub'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: login aliyun
+        if: inputs.registries == 'both' || inputs.registries == 'aliyun'
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cn-beijing.aliyuncs.com
+          username: ${{ secrets.ALIYUN_USERNAME }}
+          password: ${{ secrets.ALIYUN_PASSWORD }}
+
+      - name: build ${{ matrix.entry.dir }}
+        env:
+          DIR: ${{ matrix.entry.dir }}
+          VARIANTS: ${{ join(matrix.entry.variants, ' ') }}
+          REGISTRIES: ${{ inputs.registries }}
+        run: |
+          set -euo pipefail
+          phpv=$(grep -m1 -oE 'PHP_VERSION=php-[0-9.]+' "$DIR/Dockerfile" | cut -d- -f2)
+          swoolev=$(grep -m1 -oE 'SWOOLE_VERSION=swoole-[0-9.]+' "$DIR/Dockerfile-swoole" | cut -d- -f2)
+          case "$DIR" in
+            php)    scope=php-85; alias=1 ;;
+            php/8*) scope=php-${DIR#php/}; alias=0 ;;
+          esac
+          echo "### $DIR  php=$phpv" >> "$GITHUB_STEP_SUMMARY"
+
+          for v in $VARIANTS; do
+            case "$v" in
+              base)   file=$DIR/Dockerfile;        names="$phpv latest" ;;
+              redis)  file=$DIR/Dockerfile-redis;  names="${phpv}_redis redis" ;;
+              mongo)  file=$DIR/Dockerfile-mongo;  names="${phpv}_mongo mongo" ;;
+              swoole) file=$DIR/Dockerfile-swoole; names="${phpv}_swoole_${swoolev} swoole" ;;
+            esac
+            [ "$alias" = 1 ] || names="${names% *}"
+
+            tags=""
+            for n in $names; do
+              case "$REGISTRIES" in
+                both)   tags="$tags -t $IMAGE:$n -t $ALIYUN:$n" ;;
+                hub)    tags="$tags -t $IMAGE:$n" ;;
+                aliyun) tags="$tags -t $ALIYUN:$n" ;;
+              esac
+            done
+            out=(--output type=cacheonly)
+            [ "$REGISTRIES" = none ] || out=(--push)
+
+            echo "::group::$v"
+            docker buildx build $tags "${out[@]}" \
+              --cache-from "type=gha,scope=$scope" \
+              --cache-to "type=gha,mode=max,scope=$scope" \
+              -f "$file" "$DIR"
+            echo "::endgroup::"
+            echo "- \`$v\` => ${names}" >> "$GITHUB_STEP_SUMMARY"
+          done
