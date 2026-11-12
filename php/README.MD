@@ -58,7 +58,7 @@ php.ini 里默认 `opcache.jit=tracing` / `opcache.jit_buffer_size=64M`
 
 - mongodb
 
-`swoole` `8.5.12_swoole_6.2.4` 在 `mongo` 基础上增加
+`swoole` `8.5.12_swoole_6.2.5` 在 `mongo` 基础上增加
 
 - swoole
 
@@ -74,14 +74,14 @@ php.ini 里默认 `opcache.jit=tracing` / `opcache.jit_buffer_size=64M`
 | curl | 8.23.0 |
 | freetype | 2.15.0 |
 | libzip | 1.12.1 |
-| ImageMagick | 7.1.2-34 |
+| ImageMagick | 7.1.2-35 |
 | redis | 6.3.0 |
 | msgpack | 3.0.1 |
 | igbinary | 3.2.17RC1 |
 | imagick | 3.8.1 |
 | apcu | 5.1.28 |
-| mongodb | 2.5.5 |
-| swoole | 6.2.4 |
+| mongodb | 2.5.7 |
+| swoole | 6.2.5 |
 
 ## 构建
 
