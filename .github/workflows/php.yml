@@ -130,6 +130,7 @@ jobs:
 
             echo "::group::$v"
             docker buildx build $tags "${out[@]}" \
+              --provenance=false --sbom=false \
               --cache-from "type=gha,scope=$scope" \
               --cache-to "type=gha,mode=max,scope=$scope" \
               -f "$file" "$DIR"

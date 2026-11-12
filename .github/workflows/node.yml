@@ -84,6 +84,7 @@ jobs:
           if want node; then
             echo "::group::node $NODEV"
             docker buildx build -t "$IMAGE:latest" -t "$IMAGE:$NODEV" --load \
+              --provenance=false --sbom=false \
               --cache-from type=gha,scope=node \
               --cache-to type=gha,mode=max,scope=node \
               -f node/Dockerfile node
