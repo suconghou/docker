@@ -21,6 +21,6 @@ alpine源里的nodejs可由`apk search nodejs`查看
 | `Dockerfile-arm32v7` | `24.22.3` | arm32v7 版本 |
 | `Dockerfile-arm64v8` | `24.22.3` | arm64v8 版本 |
 | `Dockerfile-yarn` | `yarn` | 在 `latest` 基础上加 yarn `1.22.22` |
-| `Dockerfile-pnpm` | `pnpm` | 在 `yarn` 基础上加 pnpm `12.15.0` |
+| `Dockerfile-pnpm` | `pnpm` | 在 `yarn` 基础上加 pnpm `12.18.0` |
 
 镜像里只有 node 二进制,没有 npm,需要包管理器请用 `yarn` / `pnpm` 标签
