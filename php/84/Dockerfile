@@ -6,7 +6,7 @@ RUN LIBXSLT_VERSION=libxslt-1.1.45 && wget https://download.gnome.org/sources/li
 RUN CURL_VERSION=curl-8.23.0 && wget https://curl.se/download/${CURL_VERSION}.tar.xz && tar Jxf ${CURL_VERSION}.tar.xz && cd ${CURL_VERSION} && ./configure --without-libpsl --with-openssl --enable-ares && make -j$(nproc) && make install
 RUN LIBFREETYPE_VERSION=freetype-2.15.0 && wget https://download.savannah.gnu.org/releases/freetype/${LIBFREETYPE_VERSION}.tar.gz && tar zxf ${LIBFREETYPE_VERSION}.tar.gz && cd ${LIBFREETYPE_VERSION} && ./configure && make -j$(nproc) && make install && ln -s $(pwd)/builds/unix/freetype-config /usr/local/bin/freetype-config
 RUN LIBZIP_VERSION=libzip-1.12.1 && wget https://libzip.org/download/${LIBZIP_VERSION}.tar.xz && tar Jxf ${LIBZIP_VERSION}.tar.xz && cd ${LIBZIP_VERSION} && mkdir build && cd build && cmake .. -DBUILD_SHARED_LIBS=OFF && make -j$(nproc) && make install
-RUN PHP_VERSION=php-8.4.27 && wget https://www.php.net/distributions/${PHP_VERSION}.tar.xz && tar xJf ${PHP_VERSION}.tar.xz && cd ${PHP_VERSION} && \
+RUN PHP_VERSION=php-8.4.28 && wget https://www.php.net/distributions/${PHP_VERSION}.tar.xz && tar xJf ${PHP_VERSION}.tar.xz && cd ${PHP_VERSION} && \
     export CFLAGS="-O3" && LDFLAGS="-static" LIBS="$(curl-config --static-libs)" && \
     export LIBZIP_LIBS="-L/usr/local/lib64 -lzip" && \
     export LIBZIP_CFLAGS=-I/usr/local/include && \

@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t=suconghou/php:8.4.27_mongo . -f Dockerfile-mongo
+docker build -t=suconghou/php:8.4.28_mongo . -f Dockerfile-mongo

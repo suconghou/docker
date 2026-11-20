@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       versions:
-        description: '版本目录,逗号分隔,留空=全部 (85 84 83 82)'
+        description: '版本目录,逗号分隔,留空=全部 (86 85 84 83 82)'
         type: string
-        default: '85'
+        default: '86'
       variants:
         description: '变体,逗号分隔,留空=全部 (base redis mongo swoole)'
         type: string
@@ -43,10 +43,9 @@ jobs:
           set -euo pipefail
           json='['
           sep=''
-          for v in $(echo "${VERSIONS:-85,84,83,82}" | tr ',' ' '); do
+          for v in $(echo "${VERSIONS:-86,85,84,83,82}" | tr ',' ' '); do
             case "$v" in
-              85)      dir=php ;;
-              82|83|84) dir=php/$v ;;
+              82|83|84|85|86) dir=php/$v ;;
               *) echo "未知版本 $v"; exit 1 ;;
             esac
             vs='['
@@ -103,7 +102,7 @@ jobs:
           phpv=$(grep -m1 -oE 'PHP_VERSION=php-[0-9.]+' "$DIR/Dockerfile" | cut -d- -f2)
           swoolev=$(grep -m1 -oE 'SWOOLE_VERSION=swoole-[0-9.]+' "$DIR/Dockerfile-swoole" | cut -d- -f2)
           case "$DIR" in
-            php)    scope=php-85; alias=1 ;;
+            php/86) scope=php-86; alias=1 ;;
             php/8*) scope=php-${DIR#php/}; alias=0 ;;
           esac
           echo "### $DIR  php=$phpv" >> "$GITHUB_STEP_SUMMARY"
